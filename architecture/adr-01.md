@@ -8,7 +8,6 @@
 ## Context
 balbalabbla
 
----
 
 ## Decider
 Alvin Yuga Pramana
@@ -16,7 +15,6 @@ Alvin Yuga Pramana
 ## Decision
 blabaalabala
 
----
 
 ## Alternatives
 
