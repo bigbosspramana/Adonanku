@@ -7,13 +7,13 @@ Daftar keputusan teknis penting yang diambil selama pengembangan aplikasi *Adona
 | ADR 01  | Pemilihan Arsitektur Aplikasi : MVVM             | ✅ **Accepted** | 06/05/2025  | @bigbosspramana       |
 | ADR 02  | State Management : Riverpod                      | ✅ **Accepted** | 07/05/2025  | @bigbosspramana       |
 | ADR 03  | Backend Integration Strategy: RESTful API        | ✅ **Accepted** | 07/05/2025  | @bigbosspramana       |
-| ADR 04  | Local Data Persistance                           | 🕒 **Proposed** | -           | -                     |
-| ADR 05  | Dependency Injection                             | 🕒 **Proposed** | –           | –                     |
-| ADR 06  | Navigation & Routing                             | 🕒 **Proposed** | –           | –                     |
-| ADR 07  | Theming & UI Styling                             | 🕒 **Proposed** | –           | –                     |
-| ADR 08  | Offline Support & Caching                        | 🕒 **Proposed** | –           | –                     |
-| ADR 09  | Error Handling & Monitoring                      | 🕒 **Proposed** | -           | -                     |
-| ADR 10  | Testing Strategy & CI/CD Pipeline                | 🕒 **Proposed** | -           | -                     |                
+| ADR 04  | Local Data Persistance                           | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |
+| ADR 05  | Dependency Injection                             | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |
+| ADR 06  | Navigation & Routing                             | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |
+| ADR 07  | Theming & UI Styling                             | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |
+| ADR 08  | Offline Support & Caching                        | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |
+| ADR 09  | Error Handling & Monitoring                      | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |
+| ADR 10  | Testing Strategy & CI/CD Pipeline                | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |                
 
 ---
 

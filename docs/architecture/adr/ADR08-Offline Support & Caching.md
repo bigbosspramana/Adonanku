@@ -1,5 +1,5 @@
 ---
-status: Proposed
+status: Accepted
 date: 2025-07-05
 deciders: Alvin Yuga Pramana
 consulted: Artificial Intelligience (GPT)
@@ -14,7 +14,7 @@ Dalam pengembangan aplikasi Adonanku, strategi dukungan offline dan caching pent
 Namun, karena keterbatasan waktu dan skill saat ini, kami memilih pendekatan hybrid, yaitu hanya beberapa halaman penting yang mendukung mode offline, sedangkan sisanya tetap membutuhkan koneksi internet.
 
 ## Decision
-Kami memutuskan untuk **mengimplementasikan pendekatan hybrid offline-online**, di mana hanya halaman atau fitur tertentu yang memiliki dukungan offline (misalnya: daftar tempat wisata, informasi vendor populer), sedangkan fitur lain tetap online.
+Kami memutuskan untuk **mengimplementasikan pendekatan hybrid offline-online**, di mana hanya halaman atau fitur tertentu yang memiliki dukungan offline (misalnya: daftar resep yang disediakan oleh sistem), sedangkan fitur lain tetap online.
 
 Pendekatan ini memungkinkan pengembangan lebih terfokus dan realistis, sambil tetap memberikan manfaat offline bagi pengguna yang sering mengalami keterbatasan koneksi.
 

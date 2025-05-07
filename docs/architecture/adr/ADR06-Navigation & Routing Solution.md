@@ -1,5 +1,5 @@
 ---
-status: Proposed
+status: Accepted
 date: 2025-07-05
 deciders: Alvin Yuga Pramana
 consulted: Artificial Intelligience (GPT), Flutter Documentation
