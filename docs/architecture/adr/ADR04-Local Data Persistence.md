@@ -9,20 +9,22 @@ informed: Derick Norlan, Edrick Saputra Lionard
 # ADR-04: Local Data Persistence
 
 ## Context
-Ketika mengembangkan sebuah aplikasi, terutama pada pengembangan aplikasi mobile. Penyimpanan data lokal merupakan komponen penting untuk memastikan aplikasi tetap dapat berfungsi dengan baik meskipun perangkat sedang dalam kondisi Offline atau memiliki koneksi internet yang tidak stabil. Local data persistence juga penting untuk caching dan menyimpan data penting seperti preferensi pengguna atau hasil sinkronisasi. Beberapa opsi yang umum digunakan di Flutter antara lain SQLite, Hive, Sembast, dan ObjectBox, masing-masing dengan kelebihan dan kekurangannya. Pemilihan solusi yang tepat perlu disesuaikan dengan kebutuhan dan kompleksitas aplikasi.
+Ketika mengembangkan sebuah aplikasi, terutama pada pengembangan aplikasi mobile, penyimpanan data lokal merupakan komponen penting agar aplikasi tetap dapat berjalan dalam kondisi offline atau saat koneksi internet tidak stabil. Local data persistence juga digunakan untuk caching, menyimpan preferensi pengguna, serta data yang telah disinkronkan dari server. Di Flutter, beberapa opsi penyimpanan populer meliputi SQLite, Hive, Sembast, ObjectBox, dan flutter_secure_storage.
 
 ## Decision
-Kami memutuskan untuk menggunakan flutter_secure_storage untuk penyimpanan data sensitif dalam aplikasi Adonanku, karena menyediakan solusi penyimpanan terenkripsi yang aman, ideal untuk data seperti kredensial pengguna, preferensi aplikasi, dan informasi sensitif lainnya.
+Kami memutuskan untuk menggunakan **SQLite** sebagai solusi utama penyimpanan data lokal untuk aplikasi Adonanku. SQLite cocok untuk menyimpan data terstruktur dalam format tabel dan mendukung query kompleks. Ini ideal untuk menyimpan data seperti daftar destinasi wisata, informasi vendor, dan histori reservasi pengguna.
 
 ## Alternatives
-1. **SQLite** <br>
-    SQLite adalah solusi penyimpanan yang lebih umum digunakan dan cocok untuk menyimpan data dalam format tabel. Ini berguna jika aplikasi membutuhkan struktur data yang lebih kompleks, namun tidak menawarkan tingkat enkripsi yang sama seperti flutter_secure_storage.
+1. **flutter_secure_storage**  
+   Solusi ini lebih cocok untuk penyimpanan data **sensitif**, seperti token akses atau kredensial login, karena mendukung penyimpanan terenkripsi. Namun, tidak cocok untuk menyimpan data dalam jumlah besar atau untuk kebutuhan query yang kompleks.
 
 ## Consequences
 ### ✅ Good:
-- Keamanan lebih tinggi karena flutter_secure_storage menyimpan data dengan enkripsi yang kuat, menjaga data sensitif tetap aman.
-- Mudah untuk diintegrasikan dengan aplikasi Flutter, mendukung penyimpanan data sensitif seperti kredensial login, token akses, dan preferensi pengguna.
+- Mendukung penyimpanan data terstruktur dan kompleks dengan performa tinggi.
+- Bisa digunakan untuk pencarian dan manipulasi data skala besar secara lokal tanpa koneksi internet.
+- SQLite merupakan teknologi yang stabil, banyak digunakan, dan sudah matang dalam ekosistem Flutter.
 
 ### ❌ Bad:
-- Performa sedikit lebih lambat dibandingkan dengan penyimpanan lokal lainnya seperti SQLite, terutama untuk aplikasi yang menyimpan data dalam jumlah besar.
-- Keterbatasan dalam menangani data besar atau data non-sensitif, jika aplikasi membutuhkan penyimpanan data dalam jumlah besar atau query kompleks, menggunakan flutter_secure_storage bisa menjadi kurang efisien dibandingkan dengan SQLite.
+- Tidak memiliki enkripsi bawaan, sehingga tidak ideal untuk menyimpan data yang sangat sensitif tanpa tambahan library keamanan.
+- Perlu setup dan manajemen skema tabel, migrasi versi, dan validasi data secara manual, yang bisa menambah kompleksitas pengembangan.
+

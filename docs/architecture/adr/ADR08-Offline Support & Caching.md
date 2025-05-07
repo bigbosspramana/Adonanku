@@ -9,19 +9,26 @@ informed: Derick Norlan, Edrick Saputra Lionard
 # ADR-08: Offline Support & Caching
 
 ## Context
-Dalam pengembangan aplikasi Adonanku, strategi dukungan offline dan caching penting untuk meningkatkan responsivitas dan keandalan. Kami bisa menggunakan **HTTP caching headers**, pendekatan **local-first data**, atau **layer caching kustom** untuk memastikan aplikasi tetap responsif. 
+Dalam pengembangan aplikasi Adonanku, strategi dukungan offline dan caching penting untuk meningkatkan responsivitas dan keandalan. Kami mempertimbangkan berbagai pendekatan seperti **HTTP caching headers**, **local-first data**, atau **layer caching kustom**.
 
-<!-- Namun, saat ini kami akan fokus pada pengembangan fitur online terlebih dahulu sebelum mempertimbangkan fitur offline. -->
+Namun, karena keterbatasan waktu dan skill saat ini, kami memilih pendekatan hybrid, yaitu hanya beberapa halaman penting yang mendukung mode offline, sedangkan sisanya tetap membutuhkan koneksi internet.
 
 ## Decision
-<!-- Kami memutuskan untuk menunda fitur offline karena pengelolaan data lokal yang kompleks dan kebutuhan pengujian yang lebih mendalam untuk memastikan konsistensi data. Dengan fokus pada pengembangan versi online terlebih dahulu, aplikasi dapat memberikan pengalaman pengguna yang lebih stabil dan efisien. Menunda fitur offline juga memungkinkan tim pengembang untuk memanfaatkan sumber daya secara lebih efektif dan melakukan perbaikan berdasarkan umpan balik pengguna sebelum melanjutkan pengembangan lebih lanjut. -->
+Kami memutuskan untuk **mengimplementasikan pendekatan hybrid offline-online**, di mana hanya halaman atau fitur tertentu yang memiliki dukungan offline (misalnya: daftar tempat wisata, informasi vendor populer), sedangkan fitur lain tetap online.
+
+Pendekatan ini memungkinkan pengembangan lebih terfokus dan realistis, sambil tetap memberikan manfaat offline bagi pengguna yang sering mengalami keterbatasan koneksi.
 
 ## Alternatives
+- Mendukung full offline mode sejak awal.
+- Fokus 100% ke fitur online, dan offline ditunda untuk fase selanjutnya.
 
 ## Consequences
 ### ✅ Good:
-<!-- - Pengujian yang dilakukan lebih fokus sehingga lebih mendalam dan terarah  -->
+- Pengguna tetap bisa mengakses informasi penting tanpa koneksi internet.
+- Pengembangan lebih efisien karena hanya fitur terpenting yang dibangun untuk offline.
+- Menjadi nilai tambah meskipun belum 100% offline.
 
 ### ❌ Bad:
-<!-- - Pengguna yang tidak punya koneksi internet tidak bisa mengakses beberapa fitur, yang bisa mengurangi pengalaman mereka.
-- Aplikasi lain yang sudah punya fitur offline bisa lebih menarik bagi pengguna, sementara Adonanku harus menunggu untuk menambahkannya. -->
+- Pengalaman pengguna bisa sedikit tidak konsisten antar halaman (sebagian offline, sebagian online).
+- Tetap perlu manajemen sinkronisasi data untuk bagian offline.
+- Mungkin membutuhkan penjelasan di UI agar pengguna tahu halaman mana yang bisa diakses offline.
