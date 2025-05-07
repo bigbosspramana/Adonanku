@@ -1,4 +1,4 @@
-# ADR-01: Local Data Persistence
+# ADR-04: Local Data Persistence
 
 **Date:** Rabu, 08-05-2025  
 **Status:** Accepted  

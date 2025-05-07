@@ -3,7 +3,7 @@
 **Date:** Rabu, 07-05-2025  
 **Status:** Proposed  
 **Decider:** Alvin Yuga Pramana <br>
-**Consulted:** gpt, wikipedia, medium <br>
+**Consulted:** Artificial Intelligience (GPT), wikipedia, medium <br>
 **Informed:** Derick Norlan, Edrick saputra lionard
 
 
