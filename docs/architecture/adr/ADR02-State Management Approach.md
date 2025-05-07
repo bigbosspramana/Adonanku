@@ -1,11 +1,12 @@
+---
+status: Accepted
+date: 2025-07-05
+deciders: Alvin Yuga Pramana
+consulted: Artificial Intelligience (GPT), Medium
+informed: Derick Norlan, Edrick Saputra Lionard
+---
+
 # ADR-02: State Management Approach
-
-**Date:** Rabu, 07-05-2025  
-**Status:** Proposed  
-**Decider:** Alvin Yuga Pramana <br>
-**Consulted:** Artificial Intelligience (GPT), wikipedia, medium <br>
-**Informed:** Derick Norlan, Edrick saputra lionard
-
 
 ## Context
 Dalam pengembangan aplikasi Adonanku, pengelolaan state menjadi aspek krusial karena aplikasi ini memiliki berbagai fitur dinamis seperti manajemen stok bahan, konversi resep otomatis, dan pengecekan status bahan (expired, menipis, habis). Seiring dengan bertambahnya kompleksitas fitur, dibutuhkan pendekatan pengelolaan state yang tidak terstruktur dapat menyebabkan kode sulit dipelihara, diuji, dan dikembangkan.

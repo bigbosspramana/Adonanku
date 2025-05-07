@@ -1,10 +1,12 @@
-# ADR-03: Backend Integration Strategy 
+---
+status: Accepted
+date: 2025-07-05
+deciders: Alvin Yuga Pramana
+consulted: Artificial Intelligience (GPT), Medium
+informed: Derick Norlan, Edrick Saputra Lionard
+---
 
-**Date:** Rabu, 07-05-2025  
-**Status:** Proposed  
-**Decider:** Alvin Yuga Pramana <br>
-**Consulted:** Artificial Intelligience (GPT), wikipedia, medium <br>
-**Informed:** Derick Norlan, Edrick Saputra Lionard
+# ADR-03: Backend Integration Strategy 
 
 ## Context
 Aplikasi Adonanku membutuhkan koneksi ke backend untuk menyimpan, mengambil, dan memperbarui data seperti stok bahan, resep, dan status kadaluarsa. Untuk itu, kami perlu memilih cara integrasi yang tepat antara tampilan aplikasi dan penyimpanan data di belakang layar. Beberapa pilihan yang dipertimbangkan adalah RESTful API, GraphQL, dan layanan Backend-as-a-Service seperti Firebase. Pilihan ini akan mempengaruhi kecepatan pengembangan aplikasi, fleksibilitas pengelolaan data, serta performa secara keseluruhan.

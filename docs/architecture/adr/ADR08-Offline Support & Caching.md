@@ -1,11 +1,13 @@
+---
+status: Proposed
+date: 2025-07-05
+deciders: Alvin Yuga Pramana
+consulted: Artificial Intelligience (GPT)
+informed: Derick Norlan, Edrick Saputra Lionard
+---
+
 # ADR-08: Offline Support & Caching
 
-**Date:** Rabu, 08-05-2025  
-**Status:** Proposed  
-**Decider:** Alvin Yuga Pramana <br>
-**Consulted:**  <br>
-**Informed:** Derick Norlan, Edrick Saputra Lionard
- 
 ## Context
 Dalam pengembangan aplikasi Adonanku, strategi dukungan offline dan caching penting untuk meningkatkan responsivitas dan keandalan. Kami bisa menggunakan **HTTP caching headers**, pendekatan **local-first data**, atau **layer caching kustom** untuk memastikan aplikasi tetap responsif. 
 

@@ -1,10 +1,12 @@
-# ADR-01: Menentukan App Architecture Pattern
+---
+status: Accepted
+date: 2025-06-05
+deciders: Alvin Yuga Pramana
+consulted: Artificial Intelligience (GPT), Wikipedia, Medium, Flutter Documentation
+informed: Derick Norlan, Edrick Saputra Lionard
+---
 
-**Date:** Rabu, 08-05-2025  
-**Status:** Accepted  
-**Decider:** Alvin Yuga Pramana <br>
-**Consulted:** Artificial Intelligience (GPT), Wikipedia, Medium, Flutter Documentation <br>
-**Informed:** Derick Norlan, Edrick Saputra Lionard
+# ADR-01: Menentukan App Architecture Pattern
 
 ## Context
 Pada tahap awal pengembangan aplikasi Adonanku, sangat penting untuk memilih pola arsitektur yang mampu memberikan struktur yang jelas dan mendukung pengembangan jangka panjang. Mengingat aplikasi ini akan menangani berbagai fitur seperti input bahan baku dengan berbagai atribut, pengelolaan status stok secara otomatis (expired, menipis, habis), dan konversi resep dinamis, maka arsitektur yang digunakan harus mampu memisahkan logika bisnis, antarmuka pengguna (UI), dan manajemen data secara tegas. 
