@@ -1,0 +1,1 @@
+ D:\\Kuliah\\Programming\\Semester\ 4\\ALP\\adonanku_frontend\\.dart_tool\\flutter_build\\850d08e32e49548a88b3a6fc870a5a9f\\native_assets.yaml: 
