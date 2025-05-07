@@ -22,9 +22,6 @@ Kami memilih menggunakan pola arsitektur MVVM (Model-View-ViewModel) karena pola
 3. **Clean Architecture**<br>
     Clean Architecture memisahkan sistem ke dalam beberapa lapisan seperti Entities, Use Cases, Interface Adapters, dan Frameworks. Cocok untuk proyek besar karena kode jadi sangat modular dan mudah diuji. Tapi bisa terasa rumit untuk aplikasi kecil karena struktur yang kompleks.
 
-4. **Hexagonal Architecture (Ports and Adapters)**<br>
-    Hexagonal Architecture memisahkan logika inti dari elemen eksternal (UI, database, API) melalui konsep Ports (interface) dan Adapters (implementasi). Cocok untuk aplikasi besar dan fleksibel terhadap perubahan teknologi, namun terlalu kompleks untuk aplikasi sederhana.
-
 ## Consequences
 ### Good:
 - Kode lebih rapi dan terstruktur, karena tampilan dan logika dipisahkan.
