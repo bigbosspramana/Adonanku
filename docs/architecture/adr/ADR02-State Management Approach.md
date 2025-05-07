@@ -8,25 +8,35 @@
 
 
 ## Context
-Dalam pengembangan aplikasi, penting untuk memilih cara yang baik dalam mengelola status UI, logika aplikasi, dan aliran data, terutama ketika aplikasi semakin besar. Tanpa manajemen status yang baik, aplikasi bisa menjadi sulit dikelola. Beberapa solusi yang dipertimbangkan untuk ini adalah Provider, BLoC, dan Riverpod, yang masing-masing memiliki kelebihan dan kekurangan dalam hal kemudahan penggunaan, kemampuan untuk berkembang, dan kemudahan pemeliharaan.
+Dalam pengembangan aplikasi Adonanku, pengelolaan state menjadi aspek krusial karena aplikasi ini memiliki berbagai fitur dinamis seperti manajemen stok bahan, konversi resep otomatis, dan pengecekan status bahan (expired, menipis, habis). Seiring dengan bertambahnya kompleksitas fitur, dibutuhkan pendekatan pengelolaan state yang tidak terstruktur dapat menyebabkan kode sulit dipelihara, diuji, dan dikembangkan.
+
+Flutter menawarkan beberapa pendekatan manajemen state seperti Provider, Riverpod, Redux, dan BLoC. Kami perlu memilih pendekatan yang paling sesuai dengan kebutuhan aplikasi adonanku.
+
 
 ## Decision
-Kami memilih untuk menggunakan BLoC karena pendekatan ini sangat cocok untuk memisahkan logika aplikasi dari lapisan presentasi. BLoC memungkinkan data mengalir dalam bentuk stream yang dapat dengan mudah dikontrol dan diuji. Ini memberikan struktur yang jelas, sangat cocok untuk tim besar, dan membantu menjaga UI tetap bersih dari logika bisnis.
+Kami memutuskan untuk menggunakan Riverpod sebagai solusi utama dalam pengelolaan state pada aplikasi. Keputusan ini didasarkan pada fleksibilitas tinggi yang ditawarkan Riverpod, integrasinya yang erat dengan bahasa Dart, serta keunggulannya yang tidak bergantung pada BuildContext, berbeda dengan pendekatan seperti Provider. Hal ini menjadikan Riverpod lebih modular, mudah diuji, dan mudah dirawat dalam jangka panjang.
 
-Contoh alur penggunaan BLoC dalam aplikasi kami:
-* View (UI) memanggil event: misalnya pengguna menekan tombol "Tambah Bahan".
-* BLoC menerima event TambahBahanEvent, memproses logika bisnis seperti validasi, dan menyimpan data ke database.
-* Setelah data berhasil ditambahkan, BLoC mengeluarkan state baru BahanBerhasilDitambahkanState.
-* View mendengarkan state, dan akan merespons dengan menampilkan daftar bahan terbaru secara otomatis.
+Adapun keunggulan Riverpod yang menjadi pertimbangan utama kami meliputi:
+* Pemisahan yang jelas antara UI dan logika bisnis, yang mempermudah pemeliharaan dan pengembangan fitur.
+* Tidak bergantung pada BuildContext, sehingga memungkinkan pengelolaan state secara global dan mendukung unit testing secara lebih efisien.
+* Mendukung berbagai jenis state management, seperti Provider, StateProvider, StateNotifierProvider, dan FutureProvider.
+* Reaktif terhadap perubahan data tanpa boilerplate yang berlebihan.
+
+Dengan mempertimbangkan keunggulan-keunggulan tersebut, Riverpod dipilih sebagai pondasi arsitektur state management untuk mendukung skalabilitas dan stabilitas aplikasi ke depannya.
 
 ## Alternatives
-**
+* **Provider**<br>
+Lebih sederhana dan cocok untuk aplikasi kecil, namun memiliki keterbatasan dalam arsitektur besar dan bergantung pada BuildContext.
+* **BLoC (Business Logic Component)**<br>
+Memiliki struktur yang sangat terorganisir dan cocok untuk tim besar, tetapi memiliki kurva belajar yang tinggi dan banyak boilerplate.
 
 ## Consequences
-
-
 ### ✅ Good:
-- 
+- Lebih testable: Karena tidak bergantung pada context dan widget tree, pengujian unit dan widget lebih mudah.
+- Lebih modular: Dapat memisahkan state logic dari UI tanpa kesulitan.
+- Reaktif: UI otomatis merespon perubahan state.
+- Fleksibel: Bisa mengelola state sinkron dan asinkron dengan pendekatan berbeda.
 
 ### ❌ Bad:
-- 
+- Butuh pembelajaran awal: Bagi yang terbiasa dengan Provider, konsep ref, watch, dan read butuh waktu untuk dipahami.
+- Dokumentasi bisa membingungkan: Karena fleksibilitas tinggi, developer bisa bingung memilih jenis provider yang tepat (StateProvider, FutureProvider, NotifierProvider, dll).

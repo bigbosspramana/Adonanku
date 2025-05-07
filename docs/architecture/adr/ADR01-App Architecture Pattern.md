@@ -7,7 +7,10 @@
 **Informed:** Derick Norlan, Edrick Saputra Lionard
 
 ## Context
-Pada tahap awal pengembangan aplikasi, penting untuk memilih pola arsitektur yang dapat memberikan struktur yang jelas dan mendukung pengembangan jangka panjang. Pola ini akan membantu memisahkan tanggung jawab antar bagian aplikasi, membuat kode lebih mudah dirawat, diuji, dan dikembangkan ke depannya. Beberapa pilihan yang dipertimbangkan antara lain MVC, MVP, MVVM, Clean Architecture, dan Hexagonal Architecture.
+Pada tahap awal pengembangan aplikasi Adonanku, sangat penting untuk memilih pola arsitektur yang mampu memberikan struktur yang jelas dan mendukung pengembangan jangka panjang. Mengingat aplikasi ini akan menangani berbagai fitur seperti input bahan baku dengan berbagai atribut, pengelolaan status stok secara otomatis (expired, menipis, habis), dan konversi resep dinamis, maka arsitektur yang digunakan harus mampu memisahkan logika bisnis, antarmuka pengguna (UI), dan manajemen data secara tegas. 
+
+Beberapa pola arsitektur yang umum digunakan dalam pengembangan aplikasi seperti MVC, MVP, MVVM, Clean Architecture, dan Hexagonal Architecture. Pola ini akan membantu memisahkan tanggung jawab antar bagian aplikasi, membuat kode lebih mudah dirawat, diuji, dan dikembangkan ke depannya.
+
 
 ## Decision
 Kami memilih menggunakan pola arsitektur MVVM (Model-View-ViewModel) karena pola ini membantu memisahkan tampilan aplikasi (apa yang dilihat pengguna) dari logika program (cara aplikasi bekerja). Dengan cara ini, perubahan tampilan tidak akan mengganggu bagian lain, sehingga lebih mudah untuk memelihara dan mengembangkan aplikasi. Selain itu, MVVM membuat proses pengujian bagian logika aplikasi menjadi lebih mudah, karena logika tidak tercampur dengan tampilan. Bagaimana cara MVVM bekerja dalam aplikasi kami? misalnya, user sedang menambah bahan kue maka User mengisi data di View (nama: "Tepung", jumlah : 5) kemudian ViewModel menangkap input tersebut, validasi, lalu simpan di database (Melalui Mode)
