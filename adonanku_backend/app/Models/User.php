@@ -2,47 +2,47 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable; // jika menggunakan auth
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    protected $table = 'users'; // nama tabel
+
+    protected $primaryKey = 'id'; // opsional, default-nya sudah 'id'
+
+    public $timestamps = true; // true jika menggunakan created_at dan updated_at
+
     protected $fillable = [
-        'name',
+        'nama',
         'email',
+        'username',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
-        'password',
+        'password', // disembunyikan saat model dikonversi ke JSON
         'remember_token',
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Relasi ke tabel lain (contoh ke Resep)
      */
-    protected function casts(): array
+    // public function resep()
+    // {
+    //     return $this->hasMany(Resep::class, 'idUser');
+    // }
+
+    public function inventory()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Inventory::class, 'idUser');
     }
+
+    // public function konversi()
+    // {
+    //     return $this->hasMany(Konversi::class, 'idUser');
+    // }
 }
