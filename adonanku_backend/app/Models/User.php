@@ -31,18 +31,18 @@ class User extends Authenticatable
     /**
      * Relasi ke tabel lain (contoh ke Resep)
      */
-    // public function resep()
-    // {
-    //     return $this->hasMany(Resep::class, 'idUser');
-    // }
+    public function resep()
+    {
+        return $this->hasMany(Resep::class, 'idUser');
+    }
 
     public function inventory()
     {
         return $this->hasMany(Inventory::class, 'idUser');
     }
 
-    // public function konversi()
-    // {
-    //     return $this->hasMany(Konversi::class, 'idUser');
-    // }
+    public function konversi()
+    {
+        return $this->hasMany(Konversi::class, 'idUser');
+    }
 }
