@@ -1,3 +1,4 @@
+import 'package:adonanku_frontend/login.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -77,12 +78,12 @@ class _OnboardingPageViewState extends State<OnBoarding2Page> {
           if (currentPage == 2)
             ElevatedButton(
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) =>
-                //           Onboarding2App()), // Changed to HomePage
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          LoginApp()), // Changed to HomePage
+                );
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(200,65), // Panjang tombol mengikuti lebar
