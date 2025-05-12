@@ -68,6 +68,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "font_awesome_flutter",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/font_awesome_flutter-10.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "leak_tracker",
       "rootUri": "file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker-10.0.5",
       "packageUri": "lib/",
@@ -188,7 +194,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-05-09T23:06:04.490721Z",
+  "generated": "2025-05-11T20:52:33.586257Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///D:/flutter",
