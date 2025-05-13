@@ -8,26 +8,27 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('konversi_resep', function (Blueprint $table) {
-            $table->unsignedBigInteger('idKonversi'); // Kolom untuk foreign key ke bahan
-            $table->foreign('idKonversi')
-                ->references('idKonversi') // Kolom yang dirujuk pada tabel bahan
-                ->on('konversi') // Tabel yang dirujuk
+        Schema::create('resep_bahan', function (Blueprint $table) {
+            $table->unsignedBigInteger('idBahan'); // Kolom untuk foreign key ke bahan
+            $table->foreign('idBahan')
+                ->references('idBahan') // Kolom yang dirujuk pada tabel bahan
+                ->on('bahan') // Tabel yang dirujuk
                 ->onDelete('cascade'); // Aturan delete cascade
             $table->unsignedBigInteger('idResep'); // Kolom untuk foreign key ke bahan
             $table->foreign('idResep')
                 ->references('idResep') // Kolom yang dirujuk pada tabel bahan
                 ->on('resep') // Tabel yang dirujuk
                 ->onDelete('cascade'); // Aturan delete cascade
+            $table->integer('jumlahBahan');
             $table->timestamps();
 
-            // Composite primary key untuk mencegah duplikat
-            $table->primary(['idKonversi', 'idResep']);
+            // Composite primary key
+            $table->primary(['idBahan', 'idResep']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('konversi_resep');
+        Schema::dropIfExists('resep_bahan');
     }
 };

@@ -9,11 +9,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bahan', function (Blueprint $table) {
-            $table->id('idBahan'); // Primary key
-            $table->string('namaBahan', 45);
-            $table->foreignId('idSatuanBahan')->constrained('satuan_bahan')->onDelete('cascade');
-            $table->foreignId('idInventory')->nullable()->constrained('inventory')->onDelete('set null');
-            $table->timestamps(); // created_at, updated_at
+            $table->id('idBahan'); // Primary key untuk bahan
+            $table->string('namaBahan', 100);
+            $table->integer('jumlahBahan');
+            $table->unsignedBigInteger('idSatuanBahan'); // Kolom untuk foreign key ke satuan_bahan
+            $table->foreign('idSatuanBahan')
+                ->references('idSatuanBahan') // Kolom yang dirujuk pada tabel satuan_bahan
+                ->on('satuan_bahan') // Tabel yang dirujuk
+                ->onDelete('cascade'); // Aturan delete cascade
+            $table->unsignedBigInteger('idInventory'); // Kolom untuk foreign key ke inventory
+            $table->foreign('idInventory')
+                ->references('idInventory') // Kolom yang dirujuk pada tabel inventory
+                ->on('inventory') // Tabel yang dirujuk
+                ->onDelete('cascade'); // Aturan delete cascade
+            $table->timestamps();
         });
     }
 

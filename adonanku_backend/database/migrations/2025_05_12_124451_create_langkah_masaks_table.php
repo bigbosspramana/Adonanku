@@ -10,7 +10,11 @@ return new class extends Migration
     {
         Schema::create('langkah_masak', function (Blueprint $table) {
             $table->id('idLangkahMasak'); // Primary key
-            $table->foreignId('idResep')->constrained('resep')->onDelete('cascade');
+            $table->unsignedBigInteger('idResep'); // Kolom untuk foreign key ke bahan
+            $table->foreign('idResep')
+                ->references('idResep') // Kolom yang dirujuk pada tabel bahan
+                ->on('resep') // Tabel yang dirujuk
+                ->onDelete('cascade'); // Aturan delete cascade
             $table->integer('urutanMasak'); // step ke-berapa
             $table->string('deskripsi', 500);
             $table->timestamps(); // created_at, updated_at
