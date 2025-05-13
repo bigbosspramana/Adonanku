@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('status_bahan_inventory', function (Blueprint $table) {
-            $table->id('idStatusBahan');
+            $table->id('idStatusBahan'); // Primary key
             $table->string('status', 45);
             $table->timestamps();
         });

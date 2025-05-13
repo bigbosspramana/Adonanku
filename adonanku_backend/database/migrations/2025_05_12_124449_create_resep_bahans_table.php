@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('resep_bahan', function (Blueprint $table) {
-            $table->foreignId('idBahan')->constrained('bahan')->onDelete('cascade');
-            $table->foreignId('idResep')->constrained('resep')->onDelete('cascade');
+            $table->foreignId('idBahan')->references('idBahan')->on('bahan')->onDelete('cascade');
+            $table->foreignId('idResep')->references('idResep')->on('resep')->onDelete('cascade');
             $table->integer('jumlahBahan');
             $table->timestamps();
 
