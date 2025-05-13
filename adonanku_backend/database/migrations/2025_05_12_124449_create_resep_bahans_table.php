@@ -9,16 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('resep_bahan', function (Blueprint $table) {
-            $table->unsignedBigInteger('idBahan'); // Kolom untuk foreign key ke bahan
-            $table->foreign('idBahan')
-                ->references('idBahan') // Kolom yang dirujuk pada tabel bahan
-                ->on('bahan') // Tabel yang dirujuk
-                ->onDelete('cascade'); // Aturan delete cascade
-            $table->unsignedBigInteger('idResep'); // Kolom untuk foreign key ke bahan
-            $table->foreign('idResep')
-                ->references('idResep') // Kolom yang dirujuk pada tabel bahan
-                ->on('resep') // Tabel yang dirujuk
-                ->onDelete('cascade'); // Aturan delete cascade
+            $table->foreignId('idBahan')->references('idBahan')->on('bahan')->onDelete('cascade');
+            $table->foreignId('idResep')->references('idResep')->on('resep')->onDelete('cascade');
             $table->integer('jumlahBahan');
             $table->timestamps();
 

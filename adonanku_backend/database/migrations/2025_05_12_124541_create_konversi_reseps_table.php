@@ -9,16 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('konversi_resep', function (Blueprint $table) {
-            $table->unsignedBigInteger('idKonversi'); // Kolom untuk foreign key ke bahan
-            $table->foreign('idKonversi')
-                ->references('idKonversi') // Kolom yang dirujuk pada tabel bahan
-                ->on('konversi') // Tabel yang dirujuk
-                ->onDelete('cascade'); // Aturan delete cascade
-            $table->unsignedBigInteger('idResep'); // Kolom untuk foreign key ke bahan
-            $table->foreign('idResep')
-                ->references('idResep') // Kolom yang dirujuk pada tabel bahan
-                ->on('resep') // Tabel yang dirujuk
-                ->onDelete('cascade'); // Aturan delete cascade
+            $table->foreignId('idKonversi')->references('idKonversi')->on('konversi')->onDelete('cascade');
+            $table->foreignId('idResep')->references('idResep')->on('resep')->onDelete('cascade');
             $table->timestamps();
 
             // Composite primary key untuk mencegah duplikat

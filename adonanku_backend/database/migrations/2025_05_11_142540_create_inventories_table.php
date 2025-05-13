@@ -10,17 +10,14 @@ return new class extends Migration
     {
         Schema::create('inventory', function (Blueprint $table) {
             $table->id('idInventory'); // Primary key
-            $table->foreignId('idUser') // Foreign key untuk users
-                ->constrained('users') // Menyebutkan tabel referensi
-                ->onDelete('cascade'); // Aturan hapus cascade
+            $table->foreignId('idUser')->constrained('users')->onDelete('cascade'); // Aturan hapus cascade
             $table->string('url_foto', 500);
             $table->string('namaBahan', 45);
             $table->integer('jumlahBahan');
             $table->integer('jumlahSatuan');
             $table->string('tanggalInput', 45);
             $table->string('tanggalExp', 45);
-            $table->unsignedBigInteger('idStatusBahan'); // Menggunakan unsignedBigInteger
-            $table->foreign('idStatusBahan')->references('idStatusBahan')->on('status_bahan_inventory')->onDelete('cascade');
+            $table->foreignId('idStatusBahan')->references('idStatusBahan')->on('status_bahan_inventory')->onDelete('cascade');
             $table->foreignId('idJenisBahan')->references('idJenisBahan')->on('jenis_bahan')->onDelete('cascade');
             $table->foreignId('idSatuanBahan')->references('idSatuanBahan')->on('satuan_bahan')->onDelete('cascade');
             $table->timestamps();

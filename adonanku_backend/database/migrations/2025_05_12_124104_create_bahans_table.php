@@ -12,16 +12,8 @@ return new class extends Migration
             $table->id('idBahan'); // Primary key untuk bahan
             $table->string('namaBahan', 100);
             $table->integer('jumlahBahan');
-            $table->unsignedBigInteger('idSatuanBahan'); // Kolom untuk foreign key ke satuan_bahan
-            $table->foreign('idSatuanBahan')
-                ->references('idSatuanBahan') // Kolom yang dirujuk pada tabel satuan_bahan
-                ->on('satuan_bahan') // Tabel yang dirujuk
-                ->onDelete('cascade'); // Aturan delete cascade
-            $table->unsignedBigInteger('idInventory'); // Kolom untuk foreign key ke inventory
-            $table->foreign('idInventory')
-                ->references('idInventory') // Kolom yang dirujuk pada tabel inventory
-                ->on('inventory') // Tabel yang dirujuk
-                ->onDelete('cascade'); // Aturan delete cascade
+            $table->foreignID('idSatuanBahan')->references('idSatuanBahan')->on('satuan_bahan')->onDelete('cascade');
+            $table->foreignId('idInventory')->references('idInventory')->on('inventory')->onDelete('cascade');
             $table->timestamps();
         });
     }
