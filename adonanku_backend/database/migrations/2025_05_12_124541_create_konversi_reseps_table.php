@@ -12,7 +12,7 @@ return new class extends Migration
             $table->foreignId('idKonversi')->references('idKonversi')->on('konversi')->onDelete('cascade');
             $table->foreignId('idResep')->references('idResep')->on('resep')->onDelete('cascade');
             $table->timestamps();
-
+            
             // Composite primary key untuk mencegah duplikat
             $table->primary(['idKonversi', 'idResep']);
         });
