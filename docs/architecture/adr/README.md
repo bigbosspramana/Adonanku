@@ -4,7 +4,7 @@ Daftar keputusan teknis penting yang diambil selama pengembangan aplikasi *Adona
 
 | No.     | Judul Keputusan                                   | Status          | Tanggal     | Penanggung Jawab     |
 |---------|--------------------------------------------------|-----------------|-------------|-----------------------|
-| ADR 01  | [Pemilihan Arsitektur Aplikasi : MVVM](docs/architecture/adr/ADR01-App%20Architecture.md) | ✅ **Accepted** | 06/05/2025  | @bigbosspramana       |
+| ADR 01  | [Pemilihan Arsitektur Aplikasi : MVVM](docs/architecture/adr/ADR01-App%20Architecture%20Pattern.md) | ✅ **Accepted** | 06/05/2025  | @bigbosspramana       |
 | ADR 02  | [State Management : Riverpod](docs/architecture/adr/ADR02-State%20Management.md) | ✅ **Accepted** | 07/05/2025  | @bigbosspramana       |
 | ADR 03  | [Backend Integration Strategy: RESTful API](docs/architecture/adr/ADR03-Backend%20Integration.md) | ✅ **Accepted** | 07/05/2025  | @bigbosspramana       |
 | ADR 04  | [Local Data Persistance](docs/architecture/adr/ADR04-Local%20Data%20Persistance.md) | ✅ **Accepted** | 07/05/2025  | @bigbosspramana       |
