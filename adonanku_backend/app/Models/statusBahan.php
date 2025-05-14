@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class StatusBahanInventory extends Model
+class StatusBahan extends Model
 {
     use HasFactory;
 
-    protected $table = 'status_bahan_inventory'; // nama tabel sesuai migrasi
+    protected $table = 'status_bahan'; // nama tabel sesuai migrasi
 
     protected $primaryKey = 'idStatusBahan'; // kolom primary key non-standar
 
