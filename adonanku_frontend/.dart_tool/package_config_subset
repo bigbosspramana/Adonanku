@@ -34,6 +34,10 @@ flutter_lints
 3.1
 file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-4.0.0/
 file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-4.0.0/lib/
+flutter_riverpod
+2.17
+file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_riverpod-2.6.1/
+file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_riverpod-2.6.1/lib/
 font_awesome_flutter
 3.0
 file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/font_awesome_flutter-10.8.0/
@@ -74,6 +78,10 @@ path
 3.0
 file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0/
 file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0/lib/
+riverpod
+2.17
+file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/riverpod-2.6.1/
+file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/riverpod-2.6.1/lib/
 smooth_page_indicator
 2.12
 file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/smooth_page_indicator-1.2.1/
@@ -86,6 +94,10 @@ stack_trace
 2.18
 file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.1/
 file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.1/lib/
+state_notifier
+2.12
+file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/state_notifier-1.0.0/
+file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/state_notifier-1.0.0/lib/
 stream_channel
 2.19
 file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/stream_channel-2.1.2/

@@ -1,11 +1,12 @@
+// import 'package:adonanku_frontend/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 // import 'homePanti.dart'; // Changed import to homePanti.dart
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
 
-class LoginApp extends StatelessWidget {
-  const LoginApp({super.key});
+class RegisterApp extends StatelessWidget {
+  const RegisterApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,22 +15,22 @@ class LoginApp extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: const Color.fromARGB(255, 254, 254, 254),
           fontFamily: 'RadioCanada'),
-      home: const LoginPage(title: 'Adonanku'),
+      home: const RegisterPage(title: 'Adonanku'),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.title});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<LoginPage> createState() => _MyHomePageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _MyHomePageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   bool isChecked = false;
 
   @override
@@ -49,7 +50,7 @@ class _MyHomePageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Anda belum',
+                      'Anda',
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -64,7 +65,7 @@ class _MyHomePageState extends State<LoginPage> {
                       ),
                     ),
                     Text(
-                      'Memiliki',
+                      'Sudah',
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<LoginPage> {
                       ),
                     ),
                     Text(
-                      "Akun?",
+                      "Memiliki akun?",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -97,10 +98,7 @@ class _MyHomePageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Positioned(
-                top: 0,
-                left: -10,
-                child: Image.asset('assets/img/loginasset3.png')),
+            Positioned(child: Image.asset('assets/img/registasset.png')),
             Positioned(
                 top: 220,
                 right: 0,
@@ -108,10 +106,10 @@ class _MyHomePageState extends State<LoginPage> {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => RegisterPage()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterApp()),
+                      );
                     },
                     child: Text(
                       "Daftar",
@@ -160,16 +158,16 @@ class _MyHomePageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        Form(
-                          title: 'Username atau Email',
-                          icon: 'profile',
-                          placeholder: 'Masukkan username atau email',
-                        ),
-                        Form(
-                          title: 'Password',
-                          icon: 'pass',
-                          placeholder: 'Masukkan password',
-                        ),
+                        // DataCard(
+                        //   title: 'Username atau Email',
+                        //   icon: 'profile',
+                        //   placeholder: 'Masukkan username atau email',
+                        // ),
+                        // DataCard(
+                        //   title: 'Password',
+                        //   icon: 'pass',
+                        //   placeholder: 'Masukkan password',
+                        // ),
                         Container(
                           child: Row(
                             children: [
@@ -232,12 +230,12 @@ class _MyHomePageState extends State<LoginPage> {
                             margin: EdgeInsets.only(bottom: 80, top: 30),
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          LoginApp()), // Changed to HomePage
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           LoginApp()), // Changed to HomePage
+                                // );
                               },
                               style: ElevatedButton.styleFrom(
                                 minimumSize: Size(
@@ -283,79 +281,5 @@ class _MyHomePageState extends State<LoginPage> {
             )
           ],
         )));
-  }
-}
-
-class Form extends StatelessWidget {
-  final String title;
-  final String icon;
-  final String placeholder;
-
-  const Form({
-    required this.title,
-    required this.icon,
-    required this.placeholder,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final Map<String, IconData> iconMap = {
-      'profile': FontAwesomeIcons.solidUser,
-      'pass': FontAwesomeIcons.key,
-    };
-
-    return SingleChildScrollView(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF3A2216),
-            ),
-          ),
-        ),
-        Container(
-            padding: EdgeInsets.all(5),
-            margin: EdgeInsets.only(bottom: 20),
-            decoration: BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Color(0xFFBABABA))),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 15, right: 15),
-                      child: Icon(
-                        iconMap[icon],
-                        size: 20,
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: placeholder,
-                          hintStyle: TextStyle(
-                            color: Colors.grey.shade700,
-                            fontSize: 15,
-                          ),
-                          border: InputBorder.none,
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 10),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            )),
-      ],
-    ));
   }
 }
