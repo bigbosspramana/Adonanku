@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CaraMasak;
 use App\Models\Inventory;
 use App\Models\StatusBahan;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,14 @@ class DatabaseSeeder extends Seeder
             StatusBahanSeeder::class,
             SatuanBahanSeeder::class,
             InventorySeeder::class,
+            JenisKueSeeder::class,
+            BahanSeeder::class,
+            CaraMasakSeeder::class,
+            ResepSeeder::class,
+            ResepBahanSeeder::class,
+            LangkahMasakSeeder::class,
+            KonversiSeeder::class,
+            KonversiResepSeeder::class,
         ]);
     }
 }
