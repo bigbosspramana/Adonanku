@@ -40,7 +40,7 @@ class Inventory extends Model
      */
     public function statusBahan()
     {
-        return $this->belongsTo(StatusBahanInventory::class, 'idStatusBahan');
+        return $this->belongsTo(StatusBahan::class, 'idStatusBahan');
     }
 
     /**

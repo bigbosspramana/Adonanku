@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable; // jika menggunakan auth
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasFactory; // Pastikan HasFactory ada di sini
 
-    protected $table = 'users'; // nama tabel
+    protected $table = 'users'; // Nama tabel
 
-    protected $primaryKey = 'id'; // opsional, default-nya sudah 'id'
+    protected $primaryKey = 'id'; // Opsional, default-nya sudah 'id'
 
     public $timestamps = true; // true jika menggunakan created_at dan updated_at
 
@@ -24,7 +24,7 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password', // disembunyikan saat model dikonversi ke JSON
+        'password', // Disembunyikan saat model dikonversi ke JSON
         'remember_token',
     ];
 
