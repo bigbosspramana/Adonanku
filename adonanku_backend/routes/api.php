@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Middleware\Auth;
 
-// Route tanpa autentikasi
+// Public (tidak butuh token)
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login']); // Jangan pakai route name kalau untuk API
 
-// Route yang butuh autentikasi, gunakan middleware Auth manual
-Route::middleware([Auth::class])->group(function () {
+// Butuh token (pakai Sanctum)
+Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'profile']);
 });
+

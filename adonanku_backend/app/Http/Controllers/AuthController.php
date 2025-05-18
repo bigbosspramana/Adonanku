@@ -9,7 +9,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    // Register user baru
     public function register(Request $request)
     {
         try {
@@ -27,16 +26,20 @@ class AuthController extends Controller
                 'password' => bcrypt($request->password),
             ]);
 
-
-            return response()->json(['message' => 'User berhasil didaftarkan', 'user' => $user], 201);
-                } catch (ValidationException $ve) {
-                    return response()->json(['errors' => $ve->errors()], 422);
-                } catch (\Throwable $e) {
-                    return response()->json(['message' => 'Registrasi gagal', 'error' => $e->getMessage()], 500);
-                }
+            return response()->json([
+                'message' => 'User berhasil didaftarkan',
+                'user' => $user
+            ], 201);
+        } catch (ValidationException $ve) {
+            return response()->json(['errors' => $ve->errors()], 422);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Registrasi gagal',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
-    // Login user dan buat token
     public function login(Request $request)
     {
         try {
@@ -57,34 +60,44 @@ class AuthController extends Controller
                 'message' => 'Login berhasil',
                 'access_token' => $token,
                 'token_type' => 'Bearer',
+                'user' => $user
             ]);
         } catch (ValidationException $ve) {
             return response()->json(['errors' => $ve->errors()], 422);
         } catch (\Throwable $e) {
-            return response()->json(['message' => 'Login gagal', 'error' => $e->getMessage()], 500);
+            return response()->json([
+                'message' => 'Login gagal',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
-    // Logout user (hapus token)
     public function logout(Request $request)
     {
         try {
             $user = $request->user();
 
-            if ($user) {
-                $user->currentAccessToken()->delete();
-                return response()->json(['message' => 'Logout berhasil']);
+            if (!$user) {
+                return response()->json(['message' => 'User tidak terautentikasi'], 401);
             }
 
-            return response()->json(['message' => 'User tidak ditemukan'], 404);
+            // Hapus token saat ini
+            $user->currentAccessToken()->delete();
+
+            return response()->json(['message' => 'Logout berhasil'], 200);
         } catch (\Throwable $e) {
-            return response()->json(['message' => 'Logout gagal', 'error' => $e->getMessage()], 500);
+            return response()->json([
+                'message' => 'Logout gagal',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
-    // Cek profile user (protected route)
     public function profile(Request $request)
     {
-        return response()->json(['user' => $request->user()]);
+        return response()->json([
+            'message' => 'Profil user ditemukan',
+            'user' => $request->user()
+        ]);
     }
 }
