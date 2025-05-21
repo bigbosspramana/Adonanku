@@ -24,7 +24,9 @@ class Inventory extends Model
         'tanggalInput',
         'tanggalExp',
         'idStatusBahan',
+        'idSatuanBahan',
         'idJenisBahan',
+        'idJenisKemasan'
     ];
 
     /**
@@ -35,24 +37,24 @@ class Inventory extends Model
         return $this->belongsTo(User::class, 'idUser');
     }
 
-    /**
-     * Relasi ke status bahan
-     */
     public function statusBahan()
     {
-        return $this->belongsTo(StatusBahan::class, 'idStatusBahan');
+        return $this->belongsTo(StatusBahan::class, 'idStatusBahan', 'idStatusBahan');
     }
 
-    /**
-     * Relasi ke jenis bahan
-     */
+    public function satuanBahan()
+    {
+        return $this->belongsTo(SatuanBahan::class, 'idSatuanBahan', 'idSatuanBahan');
+    }
+
     public function jenisBahan()
     {
-        return $this->belongsTo(JenisBahan::class, 'idJenisBahan');
+        return $this->belongsTo(JenisBahan::class, 'idJenisBahan', 'idJenisBahan');
     }
 
     public function jenisKemasan()
     {
-        return $this->belongsTo(JenisKemasan::class, 'idJenisKemasan');
+        return $this->belongsTo(JenisKemasan::class, 'idJenisKemasan', 'idJenisKemasan');
     }
+
 }

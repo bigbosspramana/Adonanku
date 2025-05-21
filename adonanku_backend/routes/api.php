@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InventoryController;
 
 // Public (tidak butuh token)
 Route::post('/register', [AuthController::class, 'register']);
@@ -20,5 +21,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show']);      // Tampilkan user tertentu
     Route::put('/users/{id}', [UserController::class, 'update']);    // Update user
     Route::delete('/users/{id}', [UserController::class, 'destroy']); // Hapus user
+
+    // CRUD Invetroy routes
+    Route::get('/inventory', [InventoryController::class, 'index']);        // Tampilkan semua inventory
+    Route::get('/inventory/user/{idUser}', [InventoryController::class, 'getByUserId']); // Tampilkan semua inventory berdasarkan id user
+    Route::get('/inventory/{id}', [InventoryController::class, 'show']);    // Tampilkan inventory berdasarkan ID
+    Route::post('/inventory', [InventoryController::class, 'store']);       // Tambah inventory baru
+    Route::put('/inventory/{id}', [InventoryController::class, 'update']);  // Update inventory berdasarkan ID
+    Route::delete('/inventory/{id}', [InventoryController::class, 'destroy']);// Hapus inventory berdasarkan ID
 });
 
