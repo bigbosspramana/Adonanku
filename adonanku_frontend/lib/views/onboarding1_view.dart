@@ -40,11 +40,12 @@ class _Onboarding1ViewState extends State<Onboarding1View>
                   FadeTransition(
                     opacity: viewModel.fadeIn,
                     child: SlideTransition(
-                      position: viewModel.slideLeft,
-                      child: Image.asset('assets/img/boarding1.png'),
-                    ),
+                        position: viewModel.slideLeft,
+                        child: Container(
+                          margin: EdgeInsets.only(right: 62),
+                          child: Image.asset('assets/img/boarding1.png'),
+                        )),
                   ),
-                  const SizedBox(width: 62),
                   FadeTransition(
                     opacity: viewModel.fadeIn,
                     child: SlideTransition(
@@ -54,30 +55,30 @@ class _Onboarding1ViewState extends State<Onboarding1View>
                   ),
                 ],
               ),
-              const SizedBox(height: 25),
-              const Padding(
+              Container(
+                margin: EdgeInsets.only(top: 25),
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text('Selamat Datang',
                     style:
                         TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               ),
-              const Padding(
+              Container(
+                margin: EdgeInsets.only(bottom: 40),
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   'Kami dapat membantu anda dalam mengatur sistem pembuatan kue anda',
                   style: TextStyle(fontSize: 16),
                 ),
               ),
-              const SizedBox(height: 40),
               Align(
                 alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 16),
+                child: Container(
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const OnBoarding2Page()),
+                        MaterialPageRoute(
+                            builder: (_) => const OnBoarding2Page()),
                       );
                     },
                     style: ElevatedButton.styleFrom(

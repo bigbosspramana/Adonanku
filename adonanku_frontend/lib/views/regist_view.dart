@@ -1,5 +1,6 @@
 import 'package:adonanku_frontend/models/custombutton_model.dart';
 import 'package:adonanku_frontend/models/datacard_model.dart';
+import 'package:adonanku_frontend/views/login_view.dart';
 import 'package:adonanku_frontend/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:adonanku_frontend/providers/regist_provider.dart';
@@ -57,18 +58,30 @@ class RegisterPage extends ConsumerWidget {
                 Positioned(
                   top: 40,
                   right: 60,
-                  child: CustomButton(
-                    buttonData: ButtonData(
-                      text: 'Login',
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFFF9BF51),
                       foregroundColor: Colors.black,
-                      size: Size(110, 70),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          bottomRight: Radius.circular(40)),
-                      fontWeight: FontWeight.w900,
+                      fixedSize: Size(110, 70),
                       elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40),
+                        ),
+                      ),
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 20
+                      ),
                     ),
+                    child: Text('Login'),
                   ),
                 ),
                 Align(
@@ -76,7 +89,8 @@ class RegisterPage extends ConsumerWidget {
                   child: Stack(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 220, left: 20, right: 20, bottom: 40),
+                        margin: EdgeInsets.only(
+                            top: 220, left: 20, right: 20, bottom: 40),
                         width: double.infinity,
                         padding:
                             EdgeInsets.symmetric(horizontal: 30, vertical: 30),
@@ -203,8 +217,7 @@ class RegisterPage extends ConsumerWidget {
                             ),
                             Center(
                               child: Container(
-                                margin:
-                                    const EdgeInsets.only(top: 30),
+                                margin: const EdgeInsets.only(top: 30),
                                 child: CustomButton(
                                   buttonData: ButtonData(
                                     text: 'Daftar',

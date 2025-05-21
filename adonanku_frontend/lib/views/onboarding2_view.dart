@@ -74,17 +74,18 @@ class _OnboardingPageViewState extends State<OnBoarding2Page> {
                   child: Text("Skip",
                       style: TextStyle(fontSize: 18, color: Colors.black)),
                 ),
-          SizedBox(height: 40),
-          SmoothPageIndicator(
-            controller: _controller,
-            count: onboardingItems.length,
-            effect: WormEffect(
-              activeDotColor: Color(0xFFCD8636),
-              dotHeight: 12,
-              dotWidth: 12,
+          Container(
+            margin: EdgeInsets.only(bottom: 100, top: 40),
+            child: SmoothPageIndicator(
+              controller: _controller,
+              count: onboardingItems.length,
+              effect: WormEffect(
+                activeDotColor: Color(0xFFCD8636),
+                dotHeight: 12,
+                dotWidth: 12,
+              ),
             ),
-          ),
-          SizedBox(height: 30),
+          )
         ],
       ),
     );
