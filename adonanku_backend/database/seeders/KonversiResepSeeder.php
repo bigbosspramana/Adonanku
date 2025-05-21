@@ -22,7 +22,7 @@ class KonversiResepSeeder extends Seeder
             $idResepUtama = $konversi->idResep;
 
             // Misal kita tambahkan 1-2 kali hubungan ke resep yang sama (bisa disesuaikan)
-            $jumlahRelasi = rand(1, 2);
+            $jumlahRelasi = rand(4, 6);
 
             for ($i = 0; $i < $jumlahRelasi; $i++) {
                 DB::table('konversi_resep')->updateOrInsert([
