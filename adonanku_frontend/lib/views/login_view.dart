@@ -1,3 +1,4 @@
+import 'package:adonanku_frontend/views/dashboard_view.dart';
 import 'package:adonanku_frontend/views/regist_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -216,7 +217,7 @@ class LoginPage extends ConsumerWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          LoginPage()), // Changed to HomePage
+                                          DashboardPage()), // Changed to HomePage
                                 );
                               },
                               style: ElevatedButton.styleFrom(
