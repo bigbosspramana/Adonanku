@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             JenisBahanSeeder::class,
             StatusBahanSeeder::class,
             SatuanBahanSeeder::class,
+            JenisKemasanSeeder::class,
             InventorySeeder::class,
             JenisKueSeeder::class,
             BahanSeeder::class,

@@ -50,4 +50,9 @@ class Inventory extends Model
     {
         return $this->belongsTo(JenisBahan::class, 'idJenisBahan');
     }
+
+    public function jenisKemasan()
+    {
+        return $this->belongsTo(JenisKemasan::class, 'idJenisKemasan');
+    }
 }
