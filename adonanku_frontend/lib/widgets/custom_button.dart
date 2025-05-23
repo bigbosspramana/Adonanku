@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:adonanku_frontend/models/custombutton_model.dart'; // import model baru
+import 'package:adonanku_frontend/models/custombutton_model.dart';
 
 class CustomButton extends StatelessWidget {
   final ButtonData buttonData;
+  final VoidCallback onPressed;
 
   const CustomButton({
-    required this.buttonData,
     super.key,
+    required this.buttonData,
+    required this.onPressed, 
   });
 
   @override
@@ -15,7 +17,7 @@ class CustomButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed, 
           style: ElevatedButton.styleFrom(
             minimumSize: buttonData.size,
             backgroundColor: buttonData.backgroundColor,
