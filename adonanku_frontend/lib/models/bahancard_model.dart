@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class BahanCardModel {
   final String namaBahan;
   final String satuanBahan;      

@@ -76,10 +76,8 @@ class RegisterPage extends ConsumerWidget {
                           bottomRight: Radius.circular(40),
                         ),
                       ),
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 20
-                      ),
+                      textStyle:
+                          TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                     ),
                     child: Text('Login'),
                   ),
@@ -128,7 +126,7 @@ class RegisterPage extends ConsumerWidget {
                                 title: 'none',
                                 icon: 'profile',
                                 placeholder: 'Masukkan nama lengkap',
-                                controller: viewModel.usernameController,
+                                controller: viewModel.nameController,
                               ),
                             ),
                             WidgetCard(
@@ -136,8 +134,7 @@ class RegisterPage extends ConsumerWidget {
                                 title: 'none',
                                 icon: 'username',
                                 placeholder: 'Masukkan username',
-                                controller: viewModel.passwordController,
-                                obscureText: true,
+                                controller: viewModel.usernameController,
                               ),
                             ),
                             WidgetCard(
@@ -145,8 +142,7 @@ class RegisterPage extends ConsumerWidget {
                                 title: 'none',
                                 icon: 'email',
                                 placeholder: 'Masukkan email',
-                                controller: viewModel.passwordController,
-                                obscureText: true,
+                                controller: viewModel.emailController,
                               ),
                             ),
                             WidgetCard(
@@ -163,7 +159,8 @@ class RegisterPage extends ConsumerWidget {
                                 title: 'none',
                                 icon: 'confirmpass',
                                 placeholder: 'Konfirmasi password',
-                                controller: viewModel.passwordController,
+                                controller:
+                                    viewModel.passwordConfirmationController,
                                 obscureText: true,
                               ),
                             ),
@@ -224,9 +221,32 @@ class RegisterPage extends ConsumerWidget {
                                     backgroundColor: Color(0xFFCD8636),
                                     size: Size(220, 70),
                                     borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(40),
-                                        bottomRight: Radius.circular(40)),
+                                      topLeft: Radius.circular(40),
+                                      bottomRight: Radius.circular(40),
+                                    ),
                                   ),
+                                  onPressed: () async {
+                                    final errorMessage =
+                                        await viewModel.register();
+                                    if (errorMessage == null) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                            content:
+                                                Text('Registrasi berhasil')),
+                                      );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()),
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(content: Text(errorMessage)),
+                                      );
+                                    }
+                                  },
                                 ),
                               ),
                             ),

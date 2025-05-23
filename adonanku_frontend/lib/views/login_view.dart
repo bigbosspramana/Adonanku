@@ -12,7 +12,8 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(loginViewModelProvider);
+    final viewModel = ref.watch(loginProvider.notifier);
+    final state = ref.watch(loginProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -212,13 +213,24 @@ class LoginPage extends ConsumerWidget {
                           child: Container(
                             margin: EdgeInsets.only(bottom: 80, top: 30),
                             child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          DashboardPage()), // Changed to HomePage
-                                );
+                              onPressed: () async {
+                                final success = await viewModel.login();
+                                if (success) {
+                                  if (context.mounted) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              const DashboardPage()),
+                                    );
+                                  }
+                                } else {
+                                  final error = ref.read(loginProvider).value;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(error ?? 'Login gagal')),
+                                  );
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 minimumSize: Size(
@@ -235,10 +247,13 @@ class LoginPage extends ConsumerWidget {
                                 ),
                                 elevation: 5,
                               ),
-                              child: Text(
-                                "Login",
-                                style: TextStyle(fontSize: 20),
-                              ),
+                              child: state.isLoading
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white)
+                                  : const Text(
+                                      "Login",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
                             ),
                           ),
                         )
