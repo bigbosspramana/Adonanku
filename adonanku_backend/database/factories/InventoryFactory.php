@@ -6,6 +6,7 @@ use App\Models\Inventory;
 use App\Models\User;
 use App\Models\StatusBahan;
 use App\Models\JenisBahan;
+use App\Models\JenisKemasan;
 use App\Models\SatuanBahan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -45,6 +46,8 @@ class InventoryFactory extends Factory
 
             // Generate random satuan bahan ID (satuan_bahan)
             'idSatuanBahan' => SatuanBahan::all()->random()->idSatuanBahan,
+
+            'idjenisKemasan' => JenisKemasan::all()->random()->idJenisKemasan,
         ];
     }
 }

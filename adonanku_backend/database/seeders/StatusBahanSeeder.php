@@ -3,13 +3,20 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\StatusBahan; // Pastikan impor model ini
+use App\Models\StatusBahan;
 
 class StatusBahanSeeder extends Seeder
 {
     public function run(): void
     {
-        $statuses = ['habis', 'stok menipis', 'mendekati kadaluwarsa'];
+        $statuses = [
+            'Stok Habis',
+            'Stok Menipis',
+            'Stok Menipis, Mendekati Kadaluwarsa',
+            'Sudah Kadaluwarsa',
+            'Stok Aman, Mendekati Kadaluwarsa',
+            'Aman',
+        ];
 
         foreach ($statuses as $status) {
             StatusBahan::create([
@@ -18,4 +25,3 @@ class StatusBahanSeeder extends Seeder
         }
     }
 }
-

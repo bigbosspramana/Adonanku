@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('idStatusBahan')->references('idStatusBahan')->on('status_bahan')->onDelete('cascade');
             $table->foreignId('idJenisBahan')->references('idJenisBahan')->on('jenis_bahan')->onDelete('cascade');
             $table->foreignId('idSatuanBahan')->references('idSatuanBahan')->on('satuan_bahan')->onDelete('cascade');
+            $table->foreignId('idJenisKemasan')->references('idJenisKemasan')->on('jenis_kemasan')->onDelete('cascade');
             $table->timestamps();
         });
     }

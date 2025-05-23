@@ -19,4 +19,9 @@ class SatuanBahan extends Model
     {
         return $this->hasMany(Bahan::class, 'idSatuanBahan');
     }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class, 'idSatuanBahan');
+    }
 }
