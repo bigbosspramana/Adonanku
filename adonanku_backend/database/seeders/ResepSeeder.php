@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Resep;
 use App\Models\JenisKue;
 use App\Models\CaraMasak;
+use App\Models\User;
 
 class ResepSeeder extends Seeder
 {
@@ -24,11 +25,19 @@ class ResepSeeder extends Seeder
             'Kue Kering Cokelat'
         ];
 
+        // Pastikan ada user, kalau belum ada, buat dulu
+        if (User::count() === 0) {
+            User::factory()->count(5)->create();
+        }
+
         foreach ($namaResepList as $nama) {
             Resep::create([
                 'namaResep'   => $nama,
                 'idJenisKue'  => JenisKue::inRandomOrder()->first()->idJenisKue,
                 'idCaraMasak' => CaraMasak::inRandomOrder()->first()->idCaraMasak,
+                'idUser'      => User::inRandomOrder()->first()->id, // wajib isi idUser
+                'isPublic'    => true, // optional, bisa diatur sesuai kebutuhan
+                'durasiMasak' => rand(30, 120), // contoh durasi masak random antara 30-120 menit
             ]);
         }
     }
