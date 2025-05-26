@@ -18,28 +18,44 @@ class HasilKonversiSeeder extends Seeder
         }
 
         foreach ($konversis as $konversi) {
-            $bahanReseps = DB::table('resep_bahan')
-                ->where('idResep', $konversi->idResep)
-                ->get();
+            // Ambil semua idResep yang terkait dengan konversi ini dari pivot table
+            $idResepList = DB::table('konversi_resep')
+                ->where('idKonversi', $konversi->idKonversi)
+                ->pluck('idResep');
 
-            if ($bahanReseps->isEmpty()) {
-                $this->command->info("Resep id {$konversi->idResep} tidak punya bahan terkait, lewati.");
+            if ($idResepList->isEmpty()) {
+                $this->command->info("Konversi id {$konversi->idKonversi} tidak punya resep terkait, lewati.");
                 continue;
             }
 
-            foreach ($bahanReseps as $bahanResep) {
-                $jumlahAsli = $bahanResep->jumlahBahan;
+            foreach ($idResepList as $idResep) {
+                // Ambil bahan resep berdasarkan idResep
+                $bahanReseps = DB::table('resep_bahan')
+                    ->where('idResep', $idResep)
+                    ->get();
 
-                $jumlahHasil = $jumlahAsli * $konversi->jumlahKonversi;
+                if ($bahanReseps->isEmpty()) {
+                    $this->command->info("Resep id {$idResep} tidak punya bahan terkait, lewati.");
+                    continue;
+                }
 
-                DB::table('hasil_konversi')->insert([
-                    'idKonversi' => $konversi->idKonversi,
-                    'idBahan' => $bahanResep->idBahan,
-                    'jumlahAsli' => $jumlahAsli,
-                    'jumlahHasil' => $jumlahHasil,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ]);
+                foreach ($bahanReseps as $bahanResep) {
+                    $jumlahAsli = $bahanResep->jumlahBahan;
+                    $jumlahHasil = $jumlahAsli * $konversi->jumlahKonversi;
+
+                    DB::table('hasil_konversi')->updateOrInsert(
+                        [
+                            'idKonversi' => $konversi->idKonversi,
+                            'idBahan' => $bahanResep->idBahan,
+                        ],
+                        [
+                            'jumlahAsli' => $jumlahAsli,
+                            'jumlahHasil' => $jumlahHasil,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now(),
+                        ]
+                    );
+                }
             }
         }
     }

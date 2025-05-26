@@ -30,7 +30,6 @@ class KonversiSeeder extends Seeder
             foreach ($konversiSamples as $konversi) {
                 DB::table('konversi')->insert([
                     'namaKonversi' => $konversi['namaKonversi'],
-                    'idResep' => $resep->idResep,
                     'jumlahKonversi' => $konversi['jumlahKonversi'],
                     'idUser' => $users->random()->id,
                     'created_at' => now(),
