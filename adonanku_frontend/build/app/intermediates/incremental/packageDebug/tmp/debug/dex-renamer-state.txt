@@ -1,4 +1,4 @@
-#Fri May 23 13:21:17 SGT 2025
+#Mon May 26 09:32:32 SGT 2025
 base.0=D\:\\Kuliah\\Programming\\Semester 4\\ALP\\adonanku_frontend\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\Kuliah\\Programming\\Semester 4\\ALP\\adonanku_frontend\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=D\:\\Kuliah\\Programming\\Semester 4\\ALP\\adonanku_frontend\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
