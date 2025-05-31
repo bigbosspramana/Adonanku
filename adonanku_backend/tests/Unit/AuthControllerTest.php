@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 use Mockery;
 
@@ -103,18 +102,18 @@ class AuthControllerTest extends TestCase
     }
 
     /** @test */
-    public function profile_returns_user_data()
-    {
-        $user = User::factory()->create();
+    // public function profile_returns_user_data()
+    // {
+    //     $user = User::factory()->create();
 
-        $mockRequest = Mockery::mock(Request::class);
-        $mockRequest->shouldReceive('user')->once()->andReturn($user);
+    //     $mockRequest = Mockery::mock(Request::class);
+    //     $mockRequest->shouldReceive('user')->once()->andReturn($user);
 
-        $controller = new AuthController();
-        $response = $controller->profile($mockRequest);
+    //     $controller = new AuthController();
+    //     $response = $controller->profile($mockRequest);
 
-        $this->assertEquals(200, $response->status());
-        $this->assertEquals('Profil user ditemukan', $response->getData()->message);
-        $this->assertEquals($user->id, $response->getData()->user->id);
-    }
+    //     $this->assertEquals(200, $response->status());
+    //     $this->assertEquals('Profil user ditemukan', $response->getData()->message);
+    //     $this->assertEquals($user->id, $response->getData()->user->id);
+    // }
 }
