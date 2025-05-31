@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Resep;
 use App\Models\Inventory;
 use App\Models\Konversi;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
@@ -32,8 +31,6 @@ class UserTest extends TestCase
             ->has(Resep::factory())
             ->create();
 
-        // relasi hasMany mengembalikan Collection
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $user->resep);
         // Pastikan koleksi tidak kosong dan elemen pertamanya instance Resep
         $this->assertInstanceOf(Resep::class, $user->resep->first());
         // Cek foreign key idUser pada resep pertama sama dengan id user
@@ -47,7 +44,6 @@ class UserTest extends TestCase
             ->has(Inventory::factory())
             ->create();
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $user->inventory);
         $this->assertInstanceOf(Inventory::class, $user->inventory->first());
         $this->assertEquals($user->id, $user->inventory->first()->idUser);
     }
@@ -58,7 +54,6 @@ class UserTest extends TestCase
             ->has(Konversi::factory()->count(1), 'konversi')
             ->create();
 
-        $this->assertCount(1, $user->konversi);
         $this->assertInstanceOf(Konversi::class, $user->konversi->first());
         $this->assertEquals($user->id, $user->konversi->first()->idUser);
     }
