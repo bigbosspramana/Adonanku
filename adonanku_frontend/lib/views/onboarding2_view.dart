@@ -77,6 +77,7 @@ class _OnboardingPageViewState extends State<OnBoarding2Page> {
           Container(
             margin: EdgeInsets.only(bottom: 100, top: 40),
             child: SmoothPageIndicator(
+              key: Key('onboardingIndicator'),
               controller: _controller,
               count: onboardingItems.length,
               effect: WormEffect(
