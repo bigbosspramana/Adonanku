@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:adonanku_frontend/models/katbutton_model.dart';
+import 'package:adonanku_frontend/models/katbutton_helper.dart';
 
 class KategoriButton extends StatelessWidget {
   final KatButtonModel katbutton;

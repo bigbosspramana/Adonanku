@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:adonanku_frontend/models/datacard_model.dart';
+import 'package:adonanku_frontend/models/datacard_helper.dart';
 
 class WidgetCard extends StatelessWidget {
   final DataKartu card;

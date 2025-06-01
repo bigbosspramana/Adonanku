@@ -1,10 +1,10 @@
-import 'package:adonanku_frontend/models/katbutton_model.dart';
+import 'package:adonanku_frontend/models/katbutton_helper.dart';
 import 'package:adonanku_frontend/views/inventory_view.dart';
 import 'package:adonanku_frontend/widgets/kategori_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:adonanku_frontend/models/bahancard_model.dart';
+import 'package:adonanku_frontend/models/bahancard_helper.dart';
 import 'package:adonanku_frontend/widgets/bahan_card.dart';
 
 class DashboardPage extends ConsumerWidget {

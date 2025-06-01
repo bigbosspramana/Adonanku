@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:adonanku_frontend/models/onboarding_model2.dart';
+import 'package:adonanku_frontend/models/onboarding_helper.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
   final OnboardingItem item;
