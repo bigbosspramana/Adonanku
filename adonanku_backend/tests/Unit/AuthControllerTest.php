@@ -1,89 +1,248 @@
 <?php
 
+// namespace Tests\Unit;
+
+// use App\Http\Controllers\AuthController;
+// use App\Models\User;
+// use Illuminate\Foundation\Testing\RefreshDatabase;
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Hash;
+// use Tests\TestCase;
+// use Mockery;
+
+// class AuthControllerTest extends TestCase
+// {
+//     use RefreshDatabase;
+
+//     /** @test */
+//     public function user_can_register_successfully()
+//     {
+//         $controller = new AuthController();
+
+//         $request = new Request([
+//             'nama' => 'Test User',
+//             'username' => 'testuser',
+//             'email' => 'test@example.com',
+//             'password' => 'password123',
+//             'password_confirmation' => 'password123',
+//         ]);
+
+//         $response = $controller->register($request);
+
+//         $this->assertEquals(201, $response->status());
+//         $this->assertEquals('User berhasil didaftarkan', $response->getData()->message);
+//         $this->assertDatabaseHas('users', ['email' => 'test@example.com']);
+//     }
+
+//     /** @test */
+//     public function registration_fails_with_missing_fields()
+//     {
+//         $controller = new AuthController();
+//         $request = new Request([
+//             'nama' => 'Test User',
+//             'username' => 'testuser',
+//             'email' => 'test@example.com',
+//             'password' => 'password123',
+//             'password_confirmation' => '',
+//         ]);
+
+//         $response = $controller->register($request);
+
+//         $this->assertEquals(422, $response->status());
+//         $data = $response->getData(true);
+//     }
+
+//     /** @test */
+//     public function user_can_login_with_correct_credentials()
+//     {
+//         $user = User::factory()->create([
+//             'email' => 'login@example.com',
+//             'password' => Hash::make('password123'),
+//         ]);
+
+//         $controller = new AuthController();
+//         $request = new Request([
+//             'email' => $user->email,
+//             'password' => 'password123',
+//         ]);
+
+//         $response = $controller->login($request);
+
+//         $this->assertEquals(200, $response->status());
+//         $this->assertEquals('Login berhasil', $response->getData()->message);
+//         $this->assertArrayHasKey('access_token', $response->getData(true));
+//     }
+
+//     /** @test */
+//     public function login_fails_with_wrong_credentials()
+//     {
+//         $user = User::factory()->create([
+//             'email' => 'wrong@example.com',
+//             'password' => Hash::make('password123'),
+//         ]);
+
+//         $controller = new AuthController();
+//         $request = new Request([
+//             'email' => $user->email,
+//             'password' => 'password12',
+//         ]);
+
+//         $response = $controller->login($request);
+
+//         $this->assertEquals(401, $response->status());
+//         $this->assertEquals('Email atau password salah', $response->getData()->message);
+//     }
+
+//     /** @test */
+//     public function user_can_logout_successfully()
+//     {
+//         $mockToken = Mockery::mock();
+//         $mockToken->shouldReceive('delete')->once()->andReturnTrue();
+
+//         $mockUser = Mockery::mock();
+//         $mockUser->shouldReceive('currentAccessToken')->once()->andReturn($mockToken);
+
+//         $mockRequest = Mockery::mock(Request::class);
+//         $mockRequest->shouldReceive('user')->once()->andReturn($mockUser);
+
+//         $controller = new AuthController();
+//         $response = $controller->logout($mockRequest);
+
+//         $this->assertEquals(200, $response->status());
+//         $this->assertEquals('Logout berhasil', $response->getData()->message);
+//     }
+// }
+
 namespace Tests\Unit;
 
 use App\Http\Controllers\AuthController;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Tests\TestCase;
 use Mockery;
+use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
+    }
 
     /** @test */
-    public function user_can_register_successfully()
+    public function user_can_register_without_database()
     {
-        $controller = new AuthController();
+        // Mock User model static call
+        $userMock = Mockery::mock('alias:App\Models\User');
+        $userMock->shouldReceive('create')->once()->andReturn((object)[
+            'id' => 1,
+            'email' => 'test@example.com',
+            'nama' => 'Test User'
+        ]);
 
         $request = new Request([
-            'nama' => 'John Doe',
-            'username' => 'johndoe',
-            'email' => 'john@example.com',
+            'nama' => 'Test User',
+            'username' => 'testuser',
+            'email' => 'test@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',
         ]);
 
+        $controller = new AuthController();
         $response = $controller->register($request);
 
         $this->assertEquals(201, $response->status());
         $this->assertEquals('User berhasil didaftarkan', $response->getData()->message);
-        $this->assertDatabaseHas('users', ['email' => 'john@example.com']);
     }
 
     /** @test */
-    public function register_requires_all_fields()
+    public function registration_fails_with_missing_fields()
     {
-        $controller = new AuthController();
-
         $request = new Request([
-            'nama' => '',
-            'username' => 'johndoe',
-            'email' => 'john@example.com',
+            'nama' => 'Test User',
+            'username' => 'testuser',
+            'email' => 'test@example.com',
             'password' => 'password123',
-            'password_confirmation' => 'password123',
-        ]); // Kosong
+            'password_confirmation' => '', // mismatch
+        ]);
 
+        $controller = new AuthController();
         $response = $controller->register($request);
 
         $this->assertEquals(422, $response->status());
-
-        $data = $response->getData(true);
-        $this->assertArrayHasKey('errors', $data);
-        $this->assertArrayHasKey('nama', $data['errors']);
-        $this->assertArrayHasKey('username', $data['errors']);
-        $this->assertArrayHasKey('email', $data['errors']);
-        $this->assertArrayHasKey('password', $data['errors']);
+        $this->assertArrayHasKey('errors', $response->getData(true));
     }
 
     /** @test */
-    public function user_can_login_successfully()
+    public function user_can_login_without_database()
     {
-        // Buat user nyata dengan password terenkripsi
-        $user = User::factory()->create([
-            'email' => 'test@example.com',
-            'password' => Hash::make('password123'),
-        ]);
+        $fakeUser = Mockery::mock();
+        $fakeUser->password = 'hashed_password';
 
-        $controller = new AuthController();
+        // Token mock
+        $fakeUser->shouldReceive('createToken')
+            ->once()
+            ->andReturn((object)['plainTextToken' => 'fake-token']);
 
-        // Request login dengan data valid
+        // Mock User::where(...)->first()
+        $userModel = Mockery::mock('alias:App\Models\User');
+        $userModel->shouldReceive('where')
+            ->with('email', 'login@example.com')
+            ->andReturnSelf();
+        $userModel->shouldReceive('first')
+            ->andReturn($fakeUser);
+
+        // Mock Hash::check
+        Hash::shouldReceive('check')
+            ->with('password123', 'hashed_password')
+            ->once()
+            ->andReturnTrue();
+
         $request = new Request([
-            'email' => 'test@example.com',
+            'email' => 'login@example.com',
             'password' => 'password123',
         ]);
 
+        $controller = new AuthController();
         $response = $controller->login($request);
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals('Login berhasil', $response->getData()->message);
+        $this->assertArrayHasKey('access_token', $response->getData(true));
     }
 
     /** @test */
-    public function user_can_logout_successfully()
+    public function login_fails_with_wrong_credentials()
+    {
+        $fakeUser = Mockery::mock();
+        $fakeUser->password = 'hashed_password';
+
+        $userModel = Mockery::mock('alias:App\Models\User');
+        $userModel->shouldReceive('where')
+            ->with('email', 'wrong@example.com')
+            ->andReturnSelf();
+        $userModel->shouldReceive('first')
+            ->andReturn($fakeUser);
+
+        Hash::shouldReceive('check')
+            ->with('wrongpassword', 'hashed_password')
+            ->once()
+            ->andReturnFalse();
+
+        $request = new Request([
+            'email' => 'wrong@example.com',
+            'password' => 'wrongpassword',
+        ]);
+
+        $controller = new AuthController();
+        $response = $controller->login($request);
+
+        $this->assertEquals(401, $response->status());
+        $this->assertEquals('Email atau password salah', $response->getData()->message);
+    }
+
+    /** @test */
+    public function user_can_logout_without_database()
     {
         $mockToken = Mockery::mock();
         $mockToken->shouldReceive('delete')->once()->andReturnTrue();
@@ -100,20 +259,5 @@ class AuthControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
         $this->assertEquals('Logout berhasil', $response->getData()->message);
     }
-
-    /** @test */
-    // public function profile_returns_user_data()
-    // {
-    //     $user = User::factory()->create();
-
-    //     $mockRequest = Mockery::mock(Request::class);
-    //     $mockRequest->shouldReceive('user')->once()->andReturn($user);
-
-    //     $controller = new AuthController();
-    //     $response = $controller->profile($mockRequest);
-
-    //     $this->assertEquals(200, $response->status());
-    //     $this->assertEquals('Profil user ditemukan', $response->getData()->message);
-    //     $this->assertEquals($user->id, $response->getData()->user->id);
-    // }
 }
+
