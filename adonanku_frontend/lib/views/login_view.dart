@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:adonanku_frontend/providers/login_provider.dart';
 import 'dart:math';
 import 'package:adonanku_frontend/widgets/data_card.dart';
-import 'package:adonanku_frontend/models/datacard_model.dart';
+import 'package:adonanku_frontend/models/datacard_helper.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});

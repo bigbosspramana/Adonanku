@@ -14,6 +14,9 @@ Daftar keputusan teknis penting yang diambil selama pengembangan aplikasi *Adona
 | ADR 08  | Offline Support & Caching                        | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |
 | ADR 09  | Error Handling & Monitoring                      | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |
 | ADR 10  | Testing Strategy & CI/CD Pipeline                | ✅ **Accepted** | 07/05/2025           | @bigbosspramana                     |                
+| ADR 11  |  Architecture BE                | ✅ **Accepted** | 27/05/2025           | @bigbosspramana                     |                
+
+---
 
 ---
 

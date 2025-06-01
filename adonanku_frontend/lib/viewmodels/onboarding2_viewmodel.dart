@@ -1,4 +1,4 @@
-import '../models/onboarding_model2.dart';
+import '../models/onboarding_helper.dart';
 
 class OnboardingViewModel {
   List<OnboardingItem> getOnboardingItems() {

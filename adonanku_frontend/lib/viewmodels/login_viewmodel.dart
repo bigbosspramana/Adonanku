@@ -1,14 +1,15 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
-import 'package:adonanku_frontend/models/loginrequest_model.dart';
-import 'package:adonanku_frontend/models/loginresponse_model.dart';
+import 'package:adonanku_frontend/services/auth_service.dart';
 
-// ViewModel
+final loginViewModelProvider =
+    AsyncNotifierProvider<LoginViewModel, String?>(() => LoginViewModel());
+
 class LoginViewModel extends AsyncNotifier<String?> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  final _authService = AuthService(); 
 
   bool isChecked = false;
 
@@ -25,44 +26,28 @@ class LoginViewModel extends AsyncNotifier<String?> {
 
   Future<bool> login() async {
     if (!validate()) {
-      state = const AsyncValue.data(
-          "Form belum lengkap atau checkbox belum dicentang");
+      state = const AsyncValue.data("Form belum lengkap atau checkbox belum dicentang");
       return false;
     }
 
     state = const AsyncLoading();
 
-    final url = Uri.parse('http://172.20.10.3:8000/api/login');
-
-    final requestModel = LoginRequestModel(
-      email: usernameController.text.trim(),
-      password: passwordController.text.trim(),
-    );
+    final email = usernameController.text.trim();
+    final password = passwordController.text.trim();
 
     try {
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(requestModel.toJson()),
+      final loginResponse = await _authService.login(
+        email: email,
+        password: password,
       );
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        final loginResponse = LoginResponseModel.fromJson(data);
+      final token = loginResponse?.accessToken ?? '';
+      print('Token: $token');
 
-        // Simpan token kalau perlu
-        final token = loginResponse.accessToken;
-        print('Token: $token');
-
-        state = const AsyncValue.data(null);
-        return true;
-      } else {
-        final error = jsonDecode(response.body);
-        state = AsyncValue.data(error['message'] ?? 'Login gagal');
-        return false;
-      }
+      state = const AsyncValue.data(null);
+      return true;
     } catch (e) {
-      state = const AsyncValue.data("Gagal terhubung ke server");
+      state = AsyncValue.data(e.toString().replaceFirst('Exception: ', ''));
       return false;
     }
   }
@@ -73,7 +58,6 @@ class LoginViewModel extends AsyncNotifier<String?> {
       usernameController.dispose();
       passwordController.dispose();
     });
-
     return null;
   }
 }

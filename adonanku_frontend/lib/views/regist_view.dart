@@ -1,5 +1,5 @@
-import 'package:adonanku_frontend/models/custombutton_model.dart';
-import 'package:adonanku_frontend/models/datacard_model.dart';
+import 'package:adonanku_frontend/models/custombutton_helper.dart';
+import 'package:adonanku_frontend/models/datacard_helper.dart';
 import 'package:adonanku_frontend/views/login_view.dart';
 import 'package:adonanku_frontend/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
