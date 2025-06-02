@@ -14,8 +14,8 @@ class AuthController extends Controller
         try {
             $request->validate([
                 'nama' => 'required|string|max:255',
-                'username' => 'required|string|max:255|unique:users,username',
-                'email' => 'required|email|unique:users,email',
+                'username' => 'required|string|max:255',
+                'email' => 'required|email',
                 'password' => 'required|confirmed|min:8',
             ]);
 
@@ -101,5 +101,5 @@ class AuthController extends Controller
         ]);
     }
 
-    
+
 }
