@@ -1,11 +1,11 @@
 class BahanCardModel {
   final String namaBahan;
-  final String satuanBahan;      
-  final double jumlahSatuanBahan;     
-  final String jenisSatuanBahan;       
-  final double jumlahBahan;     
-  final DateTime expireDate;     
-  // final Widget img;  
+  final String satuanBahan;
+  final double jumlahSatuanBahan;
+  final String jenisSatuanBahan;
+  final double jumlahBahan;
+  final DateTime expireDate;
+  // final Widget img;
 
   BahanCardModel({
     required this.namaBahan,
