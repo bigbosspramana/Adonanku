@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-interface BahanInterface
+interface HasilKonversiRepositoryInterface
 {
     public function findById(string $id);
     public function create(array $data);

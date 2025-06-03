@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\JenisKemasan;
 
-class JenisKemasanRepository implements JenisKemasanInterface
+class JenisKemasanRepository implements JenisKemasanRepositoryInterface
 {
     public function findById(string $id)
     {

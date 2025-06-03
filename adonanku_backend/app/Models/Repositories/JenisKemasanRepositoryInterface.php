@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-interface HasilKonversiInterface
+interface JenisKemasanRepositoryInterface
 {
     public function findById(string $id);
     public function create(array $data);
@@ -10,3 +10,4 @@ interface HasilKonversiInterface
     public function delete(string $id);
     public function all();
 }
+

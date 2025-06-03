@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\CaraMasak;
 
-class CaraMasakRepository implements CaraMasakInterface
+class CaraMasakRepository implements CaraMasakRepositoryInterface
 {
     public function findById(string $id)
     {

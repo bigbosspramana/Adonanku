@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-interface ResepBahanInterface
+interface SatuanBahanRepositoryInterface
 {
     public function findById(string $id);
     public function create(array $data);
@@ -10,3 +10,4 @@ interface ResepBahanInterface
     public function delete(string $id);
     public function all();
 }
+

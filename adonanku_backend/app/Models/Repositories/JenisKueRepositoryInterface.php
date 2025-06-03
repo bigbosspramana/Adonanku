@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-interface ResepInterface
+interface JenisKueRepositoryInterface
 {
     public function findById(string $id);
     public function create(array $data);
@@ -10,3 +10,4 @@ interface ResepInterface
     public function delete(string $id);
     public function all();
 }
+

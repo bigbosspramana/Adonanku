@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-interface LangkahMasakInterface
+interface ResepRepositoryInterface
 {
     public function findById(string $id);
     public function create(array $data);

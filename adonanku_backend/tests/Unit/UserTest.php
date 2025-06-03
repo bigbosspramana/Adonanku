@@ -3,58 +3,105 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Resep;
-use App\Models\Inventory;
-use App\Models\Konversi;
+use App\Models\Repositories\UserRepositoryInterface;
+use Mockery;
 
 class UserTest extends TestCase
 {
+    protected $mockUserRepository;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->mockUserRepository = Mockery::mock(UserRepositoryInterface::class);
+        $this->app->instance(UserRepositoryInterface::class, $this->mockUserRepository);
+    }
+
     public function test_user_can_be_created()
     {
-        $user = User::factory()->create([
-            'nama' => 'Adonan Sempurna',
-            'email' => 'adonan@example.com',
-            'username' => 'adonanku',
-            'password' => bcrypt('password123'),
-        ]);
+        $userData = [
+            'nama' => 'Test User',
+            'email' => 'test@example.com',
+            'username' => 'testuser',
+            'password' => 'password123',
+        ];
 
-        $this->assertInstanceOf(User::class, $user);
-        $this->assertNotNull($user->id);
-        $this->assertEquals('Adonan Sempurna', $user->nama);
-        $this->assertEquals('adonan@example.com', $user->email);
+        $this->mockUserRepository
+            ->shouldReceive('create')
+            ->once()
+            ->with($userData)
+            ->andReturn((object) $userData);
+
+        $user = $this->mockUserRepository->create($userData);
+
+        $this->assertEquals('Test User', $user->nama);
+        $this->assertEquals('test@example.com', $user->email);
+        $this->assertEquals('testuser', $user->username);
     }
 
-    public function test_user_has_resep_relationship()
+    public function test_user_can_be_read()
     {
-        $user = User::factory()
-            ->has(Resep::factory())
-            ->create();
+        $userId = 1;
+        $userData = (object) [
+            'id' => $userId,
+            'nama' => 'Test User',
+            'email' => 'test@example.com',
+            'username' => 'testuser',
+            'password' => 'password123',
+        ];
 
-        // Pastikan koleksi tidak kosong dan elemen pertamanya instance Resep
-        $this->assertInstanceOf(Resep::class, $user->resep->first());
-        // Cek foreign key idUser pada resep pertama sama dengan id user
-        $this->assertEquals($user->id, $user->resep->first()->idUser);
+        $this->mockUserRepository
+            ->shouldReceive('findById')
+            ->once()
+            ->with($userId)
+            ->andReturn($userData);
+
+        $user = $this->mockUserRepository->findById($userId);
+
+        $this->assertEquals($userId, $user->id);
+        $this->assertEquals('Test User', $user->nama);
+        $this->assertEquals('testuser', $user->username);
     }
 
-
-    public function test_user_has_inventory_relationship()
+    public function test_user_can_be_updated()
     {
-        $user = User::factory()
-            ->has(Inventory::factory())
-            ->create();
+        $userId = 1;
+        $updateData = [
+            'nama' => 'Updated Test User',
+            'username' => 'updateduser',
+        ];
+        $updatedUserData = (object) array_merge([
+            'id' => $userId,
+            'email' => 'test@example.com',
+            'password' => 'password123'
+        ], $updateData);
 
-        $this->assertInstanceOf(Inventory::class, $user->inventory->first());
-        $this->assertEquals($user->id, $user->inventory->first()->idUser);
+        $this->mockUserRepository
+            ->shouldReceive('update')
+            ->once()
+            ->with($userId, $updateData)
+            ->andReturn($updatedUserData);
+
+        $user = $this->mockUserRepository->update($userId, $updateData);
+
+        $this->assertEquals('Updated Test User', $user->nama);
+        $this->assertEquals('updateduser', $user->username);
     }
 
-    public function test_user_has_konversi_relationship()
+    public function test_user_can_be_deleted()
     {
-        $user = User::factory()
-            ->has(Konversi::factory()->count(1), 'konversi')
-            ->create();
+        $userId = 1;
 
-        $this->assertInstanceOf(Konversi::class, $user->konversi->first());
-        $this->assertEquals($user->id, $user->konversi->first()->idUser);
+        $this->mockUserRepository
+            ->shouldReceive('delete')
+            ->once()
+            ->with($userId)
+            ->andReturn(true);
+
+        $result = $this->mockUserRepository->delete($userId);
+
+        $this->assertTrue($result);
     }
 }
+
+

@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\ResepBahan;
 
-class ResepBahanRepository implements ResepBahanInterface
+class ResepBahanRepository implements ResepBahanRepositoryInterface
 {
     public function findById(string $id)
     {

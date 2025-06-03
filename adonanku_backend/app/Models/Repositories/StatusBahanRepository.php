@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\StatusBahan;
 
-class StatusBahanRepository implements StatusBahanInterface
+class StatusBahanRepository implements StatusBahanRepositoryInterface
 {
     public function findById(string $id)
     {

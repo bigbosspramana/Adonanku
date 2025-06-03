@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\LangkahMasak;
 
-class LangkahMasakRepository implements LangkahMasakInterface
+class LangkahMasakRepository implements LangkahMasakRepositoryInterface
 {
     public function findById(string $id)
     {

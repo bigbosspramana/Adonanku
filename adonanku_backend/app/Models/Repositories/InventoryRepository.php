@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\Inventory;
 
-class InventoryRepository implements InventoryInterface
+class InventoryRepository implements InventoryRepositoryInterface
 {
     public function findById(string $id)
     {

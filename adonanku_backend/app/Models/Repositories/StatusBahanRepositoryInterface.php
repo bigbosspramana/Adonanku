@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-interface JenisBahanInterface
+interface StatusBahanRepositoryInterface
 {
     public function findById(string $id);
     public function create(array $data);

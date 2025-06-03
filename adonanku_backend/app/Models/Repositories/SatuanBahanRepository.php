@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\SatuanBahan;
 
-class SatuanBahanRepository implements SatuanBahanInterface
+class SatuanBahanRepository implements SatuanBahanRepositoryInterface
 {
     public function findById(string $id)
     {

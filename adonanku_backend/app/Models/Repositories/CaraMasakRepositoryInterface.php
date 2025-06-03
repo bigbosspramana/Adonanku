@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-interface JenisKemasanInterface
+interface CaraMasakRepositoryInterface
 {
     public function findById(string $id);
     public function create(array $data);
@@ -10,4 +10,3 @@ interface JenisKemasanInterface
     public function delete(string $id);
     public function all();
 }
-

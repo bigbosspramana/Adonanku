@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\HasilKonversi;
 
-class HasilKonversiRepository implements HasilKonversiInterface
+class HasilKonversiRepository implements HasilKonversiRepositoryInterface
 {
     public function findById(string $id)
     {

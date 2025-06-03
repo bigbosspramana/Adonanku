@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\Bahan;
 
-class BahanRepository implements BahanInterface
+class BahanRepository implements BahanRepositoryInterface
 {
     public function findById(string $id)
     {

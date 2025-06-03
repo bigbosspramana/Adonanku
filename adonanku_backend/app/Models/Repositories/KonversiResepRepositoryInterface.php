@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-interface JenisKueInterface
+interface KonversiResepRepositoryInterface
 {
     public function findById(string $id);
     public function create(array $data);
@@ -10,4 +10,3 @@ interface JenisKueInterface
     public function delete(string $id);
     public function all();
 }
-

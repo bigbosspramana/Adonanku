@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-interface InventoryInterface
+interface KonversiRepositoryInterface
 {
     public function findById(string $id);
     public function create(array $data);

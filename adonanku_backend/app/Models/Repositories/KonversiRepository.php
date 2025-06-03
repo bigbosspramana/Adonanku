@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\Konversi;
 
-class KonversiRepository implements KonversiResepInterface
+class KonversiRepository implements KonversiRepositoryInterface
 {
     public function findById(string $id)
     {

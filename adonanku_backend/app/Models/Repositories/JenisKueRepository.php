@@ -4,7 +4,7 @@ namespace App\Models\Repositories;
 
 use App\Models\JenisKue;
 
-class JenisKueRepository implements JenisKueInterface
+class JenisKueRepository implements JenisKueRepositoryInterface
 {
     public function findById(string $id)
     {
