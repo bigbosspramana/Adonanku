@@ -44,7 +44,8 @@ dependencies:
   provider: ^6.1.5
   image_picker: ^1.0.4
   google_fonts: 4.0.4
-  mockito: ^5.4.0
+  mockito: ^5.4.4
+  build_runner: ^2.4.7
 
 dev_dependencies:
   flutter_test:

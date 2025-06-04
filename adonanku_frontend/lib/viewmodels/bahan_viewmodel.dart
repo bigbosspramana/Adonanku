@@ -3,12 +3,13 @@ import 'package:image_picker/image_picker.dart';
 import '../models/bahan_model.dart';
 
 class BahanViewModel extends ChangeNotifier {
-  BahanModel _bahan = BahanModel();
-  final ImagePicker _picker = ImagePicker();
-
+  late BahanModel _bahan;
+  late final ImagePicker _picker;
   final TextEditingController jumlahController = TextEditingController();
 
-  BahanViewModel() {
+  BahanViewModel({ImagePicker? picker})
+      : _picker = picker ?? ImagePicker(),
+        _bahan = BahanModel() {
     jumlahController.text = _bahan.jumlah.toString();
     jumlahController.addListener(() {
       final text = jumlahController.text;
