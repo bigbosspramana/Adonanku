@@ -9,7 +9,10 @@ class RegisterViewModel extends ChangeNotifier {
   final passwordController = TextEditingController();
   final passwordConfirmationController = TextEditingController();
 
-  final AuthService _authService = AuthService();
+  final AuthService _authService;
+
+  RegisterViewModel({AuthService? authService})
+      : _authService = authService ?? AuthService();
 
   bool isChecked = false;
   String? errorMessage;

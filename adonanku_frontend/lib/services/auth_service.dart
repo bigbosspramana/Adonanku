@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:adonanku_frontend/models/regist_model.dart';
 import 'package:adonanku_frontend/models/login_model.dart';
+
+final authServiceProvider = Provider<AuthService>((ref) => AuthService());
 
 class AuthService {
   Future<RegisterModel?> register({

@@ -147,6 +147,7 @@ class LoginPage extends ConsumerWidget {
                             placeholder: 'Masukkan username atau email',
                             controller: viewModel.usernameController,
                           ),
+                          fieldKey: Key('usernameField'),
                         ),
                         WidgetCard(
                             card: DataKartu(
@@ -155,11 +156,13 @@ class LoginPage extends ConsumerWidget {
                           placeholder: 'Masukkan password',
                           controller: viewModel.passwordController,
                           obscureText: true,
-                        )),
+                        ),
+                        fieldKey: Key('passField'),),
                         Container(
                           child: Row(
                             children: [
                               Container(
+                                key: const Key('customCheckbox'),
                                 margin: EdgeInsets.only(right: 10),
                                 child: GestureDetector(
                                   onTap: () => viewModel.toggleCheckbox(),
@@ -213,6 +216,7 @@ class LoginPage extends ConsumerWidget {
                           child: Container(
                             margin: EdgeInsets.only(bottom: 80, top: 30),
                             child: ElevatedButton(
+                              key: const Key('loginButton'),
                               onPressed: () async {
                                 final success = await viewModel.login();
                                 if (success) {

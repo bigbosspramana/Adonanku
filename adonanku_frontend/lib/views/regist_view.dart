@@ -1,5 +1,6 @@
 import 'package:adonanku_frontend/models/custombutton_helper.dart';
 import 'package:adonanku_frontend/models/datacard_helper.dart';
+import 'package:adonanku_frontend/views/dashboard_view.dart';
 import 'package:adonanku_frontend/views/login_view.dart';
 import 'package:adonanku_frontend/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -122,12 +123,13 @@ class RegisterPage extends ConsumerWidget {
                             ),
                             const SizedBox(height: 25),
                             WidgetCard(
-                              card: DataKartu(
+                              card: DataKartu( 
                                 title: 'none',
                                 icon: 'profile',
                                 placeholder: 'Masukkan nama lengkap',
                                 controller: viewModel.nameController,
                               ),
+                              fieldKey: const Key('namaLengkap_field'),
                             ),
                             WidgetCard(
                               card: DataKartu(
@@ -136,6 +138,7 @@ class RegisterPage extends ConsumerWidget {
                                 placeholder: 'Masukkan username',
                                 controller: viewModel.usernameController,
                               ),
+                              fieldKey: const Key('username_field'),
                             ),
                             WidgetCard(
                               card: DataKartu(
@@ -144,6 +147,7 @@ class RegisterPage extends ConsumerWidget {
                                 placeholder: 'Masukkan email',
                                 controller: viewModel.emailController,
                               ),
+                              fieldKey: const Key('email_field'),
                             ),
                             WidgetCard(
                               card: DataKartu(
@@ -153,6 +157,7 @@ class RegisterPage extends ConsumerWidget {
                                 controller: viewModel.passwordController,
                                 obscureText: true,
                               ),
+                              fieldKey: const Key('password_field'),
                             ),
                             WidgetCard(
                               card: DataKartu(
@@ -163,11 +168,13 @@ class RegisterPage extends ConsumerWidget {
                                     viewModel.passwordConfirmationController,
                                 obscureText: true,
                               ),
+                              fieldKey: const Key('conpassword_field'),
                             ),
                             const SizedBox(height: 10),
                             Row(
                               children: [
                                 GestureDetector(
+                                  key: const Key('customCheckbox'),
                                   onTap: viewModel.toggleCheckbox,
                                   child: Container(
                                     width: 20,
@@ -216,6 +223,7 @@ class RegisterPage extends ConsumerWidget {
                               child: Container(
                                 margin: const EdgeInsets.only(top: 30),
                                 child: CustomButton(
+                                  key: const Key('registerButton'),
                                   buttonData: ButtonData(
                                     text: 'Daftar',
                                     backgroundColor: Color(0xFFCD8636),
@@ -238,7 +246,7 @@ class RegisterPage extends ConsumerWidget {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => LoginPage()),
+                                            builder: (context) => DashboardPage()),
                                       );
                                     } else {
                                       ScaffoldMessenger.of(context)
