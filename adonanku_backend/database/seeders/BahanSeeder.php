@@ -12,10 +12,10 @@ class BahanSeeder extends Seeder
     public function run(): void
     {
         $bahanList = [
-            ['namaBahan' => 'Gula', 'jumlahBahan' => 500],
-            ['namaBahan' => 'Tepung', 'jumlahBahan' => 1000],
-            ['namaBahan' => 'Telur', 'jumlahBahan' => 12],
-            ['namaBahan' => 'Susu', 'jumlahBahan' => 250],
+            ['namaBahan' => 'gula'],
+            ['namaBahan' => 'tepung'],
+            ['namaBahan' => 'telur'],
+            ['namaBahan' => 'susu'],
         ];
 
         foreach ($bahanList as $item) {
@@ -26,9 +26,6 @@ class BahanSeeder extends Seeder
             if ($inventory) {
                 Bahan::create([
                     'namaBahan'     => $item['namaBahan'],
-                    'jumlahBahan'   => $item['jumlahBahan'],
-                    'idSatuanBahan' => SatuanBahan::inRandomOrder()->first()->idSatuanBahan,
-                    'idInventory'   => $inventory->idInventory,
                 ]);
             }
         }

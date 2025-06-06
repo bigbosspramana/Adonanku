@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ResepController;
 
 // Public (tidak butuh token)
 Route::post('/register', [AuthController::class, 'register']);
@@ -29,5 +30,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/inventory', [InventoryController::class, 'store']);       // Tambah inventory baru
     Route::put('/inventory/{id}', [InventoryController::class, 'update']);  // Update inventory berdasarkan ID
     Route::delete('/inventory/{id}', [InventoryController::class, 'destroy']);// Hapus inventory berdasarkan ID
+
+    // CRUD Resep routes
+    Route::get('/reseps', [ResepController::class, 'index']);
+    Route::get('/reseps/{id}', [ResepController::class, 'show']);
+    Route::get('/reseps/user/{idUser}', [ResepController::class, 'resepsByUser']);
+    Route::post('/reseps', [ResepController::class, 'store']);
+    Route::put('/reseps/{id}', [ResepController::class, 'update']);
+    Route::delete('/reseps/{id}', [ResepController::class, 'destroy']);
+    Route::post('/reseps/{id}/masak', [ResepController::class, 'masak']); // membuat kue
+
 });
 

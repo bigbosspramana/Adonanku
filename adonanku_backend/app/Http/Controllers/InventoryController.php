@@ -189,17 +189,17 @@ class InventoryController extends Controller
             }
 
             $validated = $request->validate([
-                'idUser' => 'sometimes|exists:users,id',
+                'idUser' => 'required|exists:users,id',
                 'url_foto' => 'sometimes|string|max:500',
-                'namaBahan' => 'sometimes|string|max:45',
-                'jumlahBahan' => 'sometimes|integer',
-                'jumlahSatuan' => 'sometimes|integer',
-                'tanggalInput' => 'sometimes|date',
-                'tanggalExp' => 'sometimes|date',
-                'idStatusBahan' => 'sometimes|exists:status_bahan,idStatusBahan',
-                'idJenisBahan' => 'sometimes|exists:jenis_bahan,idJenisBahan',
-                'idSatuanBahan' => 'sometimes|exists:satuan_bahan,idSatuanBahan',
-                'idJenisKemasan' => 'sometimes|exists:jenis_kemasan,idJenisKemasan',
+                'namaBahan' => 'required|string|max:45',
+                'jumlahBahan' => 'required|integer',
+                'jumlahSatuan' => 'required|integer',
+                'tanggalInput' => 'required|date',
+                'tanggalExp' => 'required|date',
+                'idStatusBahan' => 'required|exists:status_bahan,idStatusBahan',
+                'idJenisBahan' => 'required|exists:jenis_bahan,idJenisBahan',
+                'idSatuanBahan' => 'required|exists:satuan_bahan,idSatuanBahan',
+                'idJenisKemasan' => 'required|exists:jenis_kemasan,idJenisKemasan',
             ]);
 
             $inventory->update($validated);

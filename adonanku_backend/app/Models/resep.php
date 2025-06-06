@@ -74,4 +74,10 @@ class Resep extends Model
         return $this->belongsToMany(Konversi::class, 'konversi_resep', 'idResep', 'idKonversi')
                     ->withTimestamps();
     }
+
+    public function resepBahan()
+    {
+        return $this->hasMany(ResepBahan::class, 'idResep', 'idResep');
+    }
+
 }

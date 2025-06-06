@@ -15,19 +15,7 @@ class Bahan extends Model
 
     protected $fillable = [
         'namaBahan',
-        'idSatuanBahan',
-        'idInventory',
     ];
-
-    public function satuanBahan()
-    {
-        return $this->belongsTo(SatuanBahan::class, 'idSatuanBahan');
-    }
-
-    public function inventory()
-    {
-        return $this->belongsTo(Inventory::class, 'idInventory');
-    }
 
     public function resep()
     {

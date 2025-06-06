@@ -11,9 +11,6 @@ return new class extends Migration
         Schema::create('bahan', function (Blueprint $table) {
             $table->id('idBahan'); // Primary key untuk bahan
             $table->string('namaBahan', 100);
-            $table->integer('jumlahBahan');
-            $table->foreignID('idSatuanBahan')->references('idSatuanBahan')->on('satuan_bahan')->onDelete('cascade');
-            $table->foreignId('idInventory')->references('idInventory')->on('inventory')->onDelete('cascade');
             $table->timestamps();
         });
     }
