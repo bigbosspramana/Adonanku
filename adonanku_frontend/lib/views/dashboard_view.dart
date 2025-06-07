@@ -15,6 +15,7 @@ class DashboardPage extends ConsumerWidget {
     // final viewModel = ref.watch(registerViewModelProvider);
 
     return Scaffold(
+        key: const Key('dashboardPage'),
         resizeToAvoidBottomInset: true,
         body: SingleChildScrollView(
           child: SafeArea(
@@ -87,7 +88,7 @@ class DashboardPage extends ConsumerWidget {
                           children: [
                             Container(
                               child: Text(
-                                'Selamat Datang, Kevin',
+                                'Selamat datang, Kevin',
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w800),
                               ),

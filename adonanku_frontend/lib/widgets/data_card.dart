@@ -3,8 +3,9 @@ import 'package:adonanku_frontend/models/datacard_helper.dart';
 
 class WidgetCard extends StatelessWidget {
   final DataKartu card;
+  final Key? fieldKey;
 
-  const WidgetCard({required this.card, super.key});
+  const WidgetCard({required this.card, this.fieldKey, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,7 @@ class WidgetCard extends StatelessWidget {
               ),
               Expanded(
                 child: TextField(
+                  key: fieldKey,
                   controller: card.controller,
                   obscureText: card.obscureText,
                   decoration: InputDecoration(

@@ -1,6 +1,7 @@
 import 'package:adonanku_frontend/models/bahancard_helper.dart';
 import 'package:adonanku_frontend/models/filter_helper.dart';
 import 'package:adonanku_frontend/models/katinfo_helper.dart';
+import 'package:adonanku_frontend/views/dashboard_view.dart';
 import 'package:adonanku_frontend/widgets/bahan_card.dart';
 import 'package:adonanku_frontend/widgets/filter_widget.dart';
 import 'package:adonanku_frontend/widgets/katinfo_widget.dart';
@@ -36,20 +37,29 @@ class InventoryPage extends ConsumerWidget {
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 30),
+                          margin: EdgeInsets.only(top: 40),
                           child: Row(
                             children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 20),
-                                padding: EdgeInsets.all(8),
-                                decoration: const BoxDecoration(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(40)),
-                                ),
-                                child: Icon(
-                                  FontAwesomeIcons.arrowLeft,
-                                  size: 18,
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DashboardPage()),
+                                  );
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 20),
+                                  padding: EdgeInsets.all(8),
+                                  decoration: const BoxDecoration(
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(40)),
+                                  ),
+                                  child: Icon(
+                                    FontAwesomeIcons.arrowLeft,
+                                    size: 18,
+                                  ),
                                 ),
                               ),
                               Container(
@@ -138,15 +148,18 @@ class InventoryPage extends ConsumerWidget {
                             child: Row(
                               children: const [
                                 FilterWidget(
-                                    filter: FilterHelper(nama: 'Stok Habis', marright: 5)),
-                                FilterWidget(
-                                    filter: FilterHelper(nama: 'Stok Menipis', marright: 5)),
+                                    filter: FilterHelper(
+                                        nama: 'Stok Habis', marright: 5)),
                                 FilterWidget(
                                     filter: FilterHelper(
-                                        nama: 'Stok Akan Kadaluarsa', marright: 5)),
+                                        nama: 'Stok Menipis', marright: 5)),
                                 FilterWidget(
-                                    filter:
-                                        FilterHelper(nama: 'Stok Kadaluarsa', marright: 25)),
+                                    filter: FilterHelper(
+                                        nama: 'Stok Akan Kadaluarsa',
+                                        marright: 5)),
+                                FilterWidget(
+                                    filter: FilterHelper(
+                                        nama: 'Stok Kadaluarsa', marright: 25)),
                               ],
                             ),
                           ),

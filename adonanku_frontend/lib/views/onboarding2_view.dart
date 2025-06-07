@@ -5,25 +5,38 @@ import 'package:adonanku_frontend/viewmodels/onboarding2_viewmodel.dart';
 import 'package:adonanku_frontend/widgets/onboarding2_widget.dart';
 
 class OnBoarding2Page extends StatefulWidget {
-  const OnBoarding2Page({super.key});
+  final PageController? externalController;
+
+  const OnBoarding2Page({super.key, this.externalController});
 
   @override
   State<OnBoarding2Page> createState() => _OnboardingPageViewState();
 }
 
 class _OnboardingPageViewState extends State<OnBoarding2Page> {
-  final PageController _controller = PageController();
+  late final PageController _controller;
   final onboardingItems = OnboardingViewModel().getOnboardingItems();
   int currentPage = 0;
 
   @override
   void initState() {
     super.initState();
+    _controller = widget.externalController ?? PageController();
     _controller.addListener(() {
-      setState(() {
-        currentPage = _controller.page!.round();
-      });
+      if (mounted) {
+        setState(() {
+          currentPage = _controller.page?.round() ?? 0;
+        });
+      }
     });
+  }
+
+  @override
+  void dispose() {
+    if (widget.externalController == null) {
+      _controller.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -45,42 +58,42 @@ class _OnboardingPageViewState extends State<OnBoarding2Page> {
           currentPage == onboardingItems.length - 1
               ? ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => LoginPage()));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => LoginPage()));
                   },
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(200, 65),
-                    backgroundColor: Color(0xFFCD8636),
+                    minimumSize: const Size(200, 65),
+                    backgroundColor: const Color(0xFFCD8636),
                     foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(40),
                         bottomRight: Radius.circular(40),
                       ),
                     ),
                   ),
-                  child: Text("Lanjut", style: TextStyle(fontSize: 20)),
+                  child: const Text("Lanjut", style: TextStyle(fontSize: 20)),
                 )
               : TextButton(
                   onPressed: () {
                     if (currentPage < onboardingItems.length - 1) {
                       _controller.animateToPage(
                         currentPage + 1,
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         curve: Curves.easeInOut,
                       );
                     }
                   },
-                  child: Text("Skip",
+                  child: const Text("Skip",
                       style: TextStyle(fontSize: 18, color: Colors.black)),
                 ),
           Container(
-            margin: EdgeInsets.only(bottom: 100, top: 40),
+            margin: const EdgeInsets.only(bottom: 100, top: 40),
             child: SmoothPageIndicator(
-              key: Key('onboardingIndicator'),
+              key: const Key('onboardingIndicator'),
               controller: _controller,
               count: onboardingItems.length,
-              effect: WormEffect(
+              effect: const WormEffect(
                 activeDotColor: Color(0xFFCD8636),
                 dotHeight: 12,
                 dotWidth: 12,

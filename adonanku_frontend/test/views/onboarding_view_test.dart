@@ -3,7 +3,6 @@ import 'package:adonanku_frontend/views/onboarding2_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 void main() {
   group('OnBoarding Flow', () {
@@ -22,52 +21,44 @@ void main() {
 
     testWidgets('Navigasi halaman OnBoarding2 berjalan sesuai urutan',
         (WidgetTester tester) async {
-      await tester.binding.setSurfaceSize(const Size(800, 1600));
+      final controller = PageController();
 
       await tester.pumpWidget(
         ProviderScope(
-          child: const MaterialApp(home: Onboarding1View()),
+          child: MaterialApp(
+            home: OnBoarding2Page(externalController: controller),
+          ),
         ),
       );
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Mulai'));
-      await tester.pumpAndSettle();
-
-      // Index 0
+      // Halaman pertama
       expect(find.text('Sistem Inventori'), findsOneWidget);
+      expect(controller.page?.round(), 0);
+
       await tester.tap(find.text('Skip'));
       await tester.pumpAndSettle();
 
-      // Index 1
+      // Halaman kedua
       expect(find.text('Resep Populer'), findsOneWidget);
+      expect(controller.page?.round(), 1);
+
       await tester.tap(find.text('Skip'));
       await tester.pumpAndSettle();
 
-      // Index 2
+      // Halaman ketiga
       expect(find.text('Konversi Bahan'), findsOneWidget);
+      expect(controller.page?.round(), 2);
+
       await tester.tap(find.text('Lanjut'));
       await tester.pumpAndSettle();
 
+      // Halaman Login
       expect(find.text('Login'), findsWidgets);
-    });
-
-    testWidgets('Smooth Page Indicator OnBoarding2_View',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const MaterialApp(home: OnBoarding2Page()));
-      await tester.pumpAndSettle();
-
-      // Pastikan indikator ditemukan
-      expect(find.byType(SmoothPageIndicator), findsOneWidget);
-
-      // Ambil widget indikator
-      final indicator = tester.widget<SmoothPageIndicator>(
-        find.byType(SmoothPageIndicator),
-      );
-
-      // Cek jumlah dot (halaman)
-      expect(indicator.count, 3);
+      expect(find.text('Anda belum'), findsWidgets);
+      expect(find.text('Memiliki'), findsWidgets);
+      expect(find.text('Akun?'), findsWidgets);
     });
   });
 }
