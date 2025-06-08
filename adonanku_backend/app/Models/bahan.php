@@ -15,19 +15,7 @@ class Bahan extends Model
 
     protected $fillable = [
         'namaBahan',
-        'idSatuanBahan',
-        'idInventory',
     ];
-
-    public function satuanBahan()
-    {
-        return $this->belongsTo(SatuanBahan::class, 'idSatuanBahan');
-    }
-
-    public function inventory()
-    {
-        return $this->belongsTo(Inventory::class, 'idInventory');
-    }
 
     public function resep()
     {
@@ -35,4 +23,10 @@ class Bahan extends Model
                     ->withPivot('jumlahBahan')
                     ->withTimestamps();
     }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class, 'idBahan', 'idBahan');
+    }
+
 }

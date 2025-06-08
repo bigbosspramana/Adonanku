@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ResepController;
+use App\Http\Controllers\LangkahMasakController;
 
 // Public (tidak butuh token)
 Route::post('/register', [AuthController::class, 'register']);
@@ -29,5 +31,24 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/inventory', [InventoryController::class, 'store']);       // Tambah inventory baru
     Route::put('/inventory/{id}', [InventoryController::class, 'update']);  // Update inventory berdasarkan ID
     Route::delete('/inventory/{id}', [InventoryController::class, 'destroy']);// Hapus inventory berdasarkan ID
+
+    // CRUD Resep routes
+    Route::get('/reseps', [ResepController::class, 'index']);
+    Route::get('/reseps/{id}', [ResepController::class, 'show']);
+    Route::get('/reseps/user/{idUser}', [ResepController::class, 'resepsByUser']);
+    Route::post('/reseps', [ResepController::class, 'store']);
+    Route::put('/reseps/{id}', [ResepController::class, 'update']);
+    Route::delete('/reseps/{id}', [ResepController::class, 'destroy']);
+    Route::post('/reseps/{id}/masak', [ResepController::class, 'masak']); // membuat kue
+
+    // CRUD LangkahMasak routes
+    Route::get('/langkahmasak', [LangkahMasakController::class, 'index']);         // Ambil semua data
+    Route::post('/langkahmasak', [LangkahMasakController::class, 'store']);        // Tambah data baru
+    Route::get('/langkahmasak/{id}', [LangkahMasakController::class, 'show']);     // Ambil detail data
+    Route::get('/langkahmasak/resep/{idResep}', [LangkahMasakController::class, 'showByResep']);
+    Route::put('/langkahmasak/{id}', [LangkahMasakController::class, 'update']);   // Update data
+    Route::put('/langkahmasak/resep/{idResep}', [LangkahMasakController::class, 'updateByResep']);
+    Route::delete('/langkahmasak/{id}', [LangkahMasakController::class, 'destroy']);// Hapus data
+    
 });
 

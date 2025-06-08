@@ -8,6 +8,7 @@ use App\Models\StatusBahan;
 use App\Models\JenisBahan;
 use App\Models\JenisKemasan;
 use App\Models\SatuanBahan;
+use App\Models\Bahan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InventoryFactory extends Factory
@@ -16,38 +17,37 @@ class InventoryFactory extends Factory
 
     public function definition(): array
     {
+        // Ambil data bahan random, jika kosong return null
+        $bahan = Bahan::inRandomOrder()->first();
+        $statusBahan = StatusBahan::inRandomOrder()->first();
+        $jenisBahan = JenisBahan::inRandomOrder()->first();
+        $satuanBahan = SatuanBahan::inRandomOrder()->first();
+        $jenisKemasan = JenisKemasan::inRandomOrder()->first();
+
         return [
-            // Generate random user ID
-            'idUser' => User::all()->random()->id,
+            'idUser' => User::inRandomOrder()->first()->id,
 
-            // Generate random URL foto
-            'url_foto' => 'https://via.placeholder.com/150', // Gambar placeholder
+            'url_foto' => 'https://via.placeholder.com/150',
 
-            // Generate random nama bahan (antara gula, tepung, telur, susu)
-            'namaBahan' => $this->faker->randomElement(['gula', 'tepung', 'telur', 'susu']),
+            'namaBahan' => $bahan ? $bahan->namaBahan : 'default bahan',
 
-            // Generate random jumlah bahan
             'jumlahBahan' => $this->faker->numberBetween(1, 100),
 
-            // Generate random jumlah satuan
             'jumlahSatuan' => $this->faker->numberBetween(1, 10),
 
-            // Generate tanggal input mulai 1 bulan ke depan
             'tanggalInput' => $this->faker->dateTimeBetween('first day of next month', '+3 months')->format('Y-m-d'),
 
-            // Generate tanggal exp mulai 1 bulan setelah tanggal input
             'tanggalExp' => $this->faker->dateTimeBetween('+2 months', '+6 months')->format('Y-m-d'),
 
-            // Generate random status bahan ID (status_bahan_inventory)
-            'idStatusBahan' => StatusBahan::all()->random()->idStatusBahan,
+            'idStatusBahan' => $statusBahan ? $statusBahan->idStatusBahan : 1,
 
-            // Generate random jenis bahan ID (jenis_bahan)
-            'idJenisBahan' => JenisBahan::all()->random()->idJenisBahan,
+            'idBahan' => $bahan ? $bahan->idBahan : 1,
 
-            // Generate random satuan bahan ID (satuan_bahan)
-            'idSatuanBahan' => SatuanBahan::all()->random()->idSatuanBahan,
+            'idJenisBahan' => $jenisBahan ? $jenisBahan->idJenisBahan : 1,
 
-            'idjenisKemasan' => JenisKemasan::all()->random()->idJenisKemasan,
+            'idSatuanBahan' => $satuanBahan ? $satuanBahan->idSatuanBahan : 1,
+
+            'idJenisKemasan' => $jenisKemasan ? $jenisKemasan->idJenisKemasan : 1,
         ];
     }
 }
