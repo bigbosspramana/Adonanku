@@ -89,7 +89,7 @@ class InventoryController extends Controller
     public function store(Request $request)
 {
     try {
-        // Validasi input
+        // Validasi input tanpa idStatusBahan dan idBahan karena nanti generate
         $validated = $request->validate([
             'idUser' => 'required|exists:users,id',
             'url_foto' => 'required|string|max:500',
@@ -103,7 +103,18 @@ class InventoryController extends Controller
             'idJenisKemasan' => 'required|exists:jenis_kemasan,idJenisKemasan',
         ]);
 
-        // Status mapping ke database (sesuaikan dengan ID di tabel status_bahan)
+        // Cari bahan berdasarkan namaBahan (case insensitive)
+        $bahan = \App\Models\Bahan::where('namaBahan', 'LIKE', $validated['namaBahan'])->first();
+
+        // Jika belum ada bahan, buat baru
+        if (!$bahan) {
+            $bahan = \App\Models\Bahan::create([
+                'namaBahan' => $validated['namaBahan'],
+                // isi field lain jika ada wajib
+            ]);
+        }
+
+        // Mapping status
         $statusMapping = [
             'stok habis' => 1,
             'stok menipis' => 2,
@@ -113,29 +124,27 @@ class InventoryController extends Controller
             'aman' => 6,
         ];
 
-        // Tentukan status stok berdasarkan jumlahBahan
+        // Tentukan stok dan exp status
         if ($validated['jumlahBahan'] <= 0) {
             $stokStatus = 'stok habis';
-        } elseif ($validated['jumlahBahan'] <= 5) {  // threshold menipis, bisa diubah
+        } elseif ($validated['jumlahBahan'] <= 5) {
             $stokStatus = 'stok menipis';
         } else {
             $stokStatus = 'stok aman';
         }
 
-        // Tentukan status exp berdasarkan tanggalExp sekarang
         $today = new \DateTime();
         $tanggalExp = new \DateTime($validated['tanggalExp']);
-        $diffDays = (int)$today->diff($tanggalExp)->format('%r%a'); // selisih hari, bisa negatif
+        $diffDays = (int)$today->diff($tanggalExp)->format('%r%a');
 
         if ($diffDays < 0) {
             $expStatus = 'sudah kadaluwarsa';
-        } elseif ($diffDays <= 7) {  // threshold mendekati kadaluwarsa (7 hari)
+        } elseif ($diffDays <= 7) {
             $expStatus = 'mendekati kadaluwarsa';
         } else {
             $expStatus = 'aman';
         }
 
-        // Tentukan idStatusBahan berdasarkan kombinasi stok dan exp
         if ($stokStatus === 'stok habis') {
             $statusGabungan = 'stok habis';
         } elseif ($stokStatus === 'stok menipis' && $expStatus === 'mendekati kadaluwarsa') {
@@ -150,11 +159,13 @@ class InventoryController extends Controller
             $statusGabungan = 'aman';
         }
 
-        // Set idStatusBahan
-        $validated['idStatusBahan'] = $statusMapping[$statusGabungan];
+        // Buat data lengkap untuk simpan
+        $dataToInsert = $validated;
+        $dataToInsert['idStatusBahan'] = $statusMapping[$statusGabungan];
+        $dataToInsert['idBahan'] = $bahan->idBahan;
 
-        // Simpan data inventory
-        $inventory = Inventory::create($validated);
+        // Simpan ke tabel inventory
+        $inventory = \App\Models\Inventory::create($dataToInsert);
 
         return response()->json([
             'message' => 'Inventory berhasil dibuat',
@@ -169,6 +180,7 @@ class InventoryController extends Controller
         ], 500);
     }
 }
+
 
 
 

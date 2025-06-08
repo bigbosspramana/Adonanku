@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('jumlahSatuan');
             $table->string('tanggalInput', 45);
             $table->string('tanggalExp', 45);
+            $table->foreignId('idBahan')->references('idBahan')->on('bahan')->onDelete('cascade');
             $table->foreignId('idStatusBahan')->references('idStatusBahan')->on('status_bahan')->onDelete('cascade');
             $table->foreignId('idJenisBahan')->references('idJenisBahan')->on('jenis_bahan')->onDelete('cascade');
             $table->foreignId('idSatuanBahan')->references('idSatuanBahan')->on('satuan_bahan')->onDelete('cascade');

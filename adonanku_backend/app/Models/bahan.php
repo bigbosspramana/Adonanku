@@ -23,4 +23,10 @@ class Bahan extends Model
                     ->withPivot('jumlahBahan')
                     ->withTimestamps();
     }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class, 'idBahan', 'idBahan');
+    }
+
 }

@@ -8,7 +8,8 @@ use App\Models\Inventory;
 use App\Models\ResepBahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 
 class ResepController extends Controller
 {
@@ -198,8 +199,8 @@ class ResepController extends Controller
 
     public function masak($idResep)
     {
-        $resep = Resep::with('bahan.inventory')->findOrFail($idResep);
-        $userId = $resep->idUser;
+        $resep = Resep::with('bahan')->findOrFail($idResep);
+        $userId = Auth::id(); // user yang sedang login
 
         foreach ($resep->bahan as $bahan) {
             $jumlahDibutuhkan = $bahan->pivot->jumlahBahan;
@@ -210,11 +211,13 @@ class ResepController extends Controller
                 ->first();
 
             if (!$inventory) {
-                return response()->json(['error' => "Bahan '{$bahan->namaBahan}' tidak cukup di inventory."], 400);
+                return response()->json([
+                    'error' => "Bahan '{$bahan->namaBahan}' tidak cukup di inventory user."
+                ], 400);
             }
         }
 
-        // Jika semua bahan cukup, kurangi stok
+        // Kurangi stok jika semua bahan cukup
         foreach ($resep->bahan as $bahan) {
             $jumlahDibutuhkan = $bahan->pivot->jumlahBahan;
 
@@ -226,6 +229,8 @@ class ResepController extends Controller
             $inventory->save();
         }
 
-        return response()->json(['message' => 'Kue berhasil dibuat dan stok bahan dikurangi.']);
+        return response()->json([
+            'message' => 'Kue berhasil dibuat dan stok bahan milik user berhasil dikurangi.'
+        ]);
     }
 }

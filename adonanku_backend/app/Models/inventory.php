@@ -23,6 +23,7 @@ class Inventory extends Model
         'jumlahSatuan',
         'tanggalInput',
         'tanggalExp',
+        'idBahan',
         'idStatusBahan',
         'idSatuanBahan',
         'idJenisBahan',
