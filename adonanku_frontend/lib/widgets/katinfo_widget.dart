@@ -1,4 +1,4 @@
-import 'package:adonanku_frontend/models/katinfo_helper.dart';
+import 'package:adonanku_frontend/helper/katinfo_helper.dart';
 import 'package:flutter/material.dart';
 
 class KatInfoWidget extends StatelessWidget {

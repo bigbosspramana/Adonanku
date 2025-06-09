@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adonanku_frontend/viewmodels/onboarding1_viewmodel.dart';
-import 'package:adonanku_frontend/views/onboarding2_view.dart'; // atau taruh onboarding2 juga di views
+import 'package:go_router/go_router.dart';
 
 class Onboarding1View extends StatefulWidget {
   const Onboarding1View({super.key});
@@ -75,11 +75,8 @@ class _Onboarding1ViewState extends State<Onboarding1View>
                 child: Container(
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const OnBoarding2Page()),
-                      );
+                      context.goNamed(
+                          'onboarding2');
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(200, 65),
