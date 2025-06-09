@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:adonanku_frontend/views/login_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:adonanku_frontend/viewmodels/onboarding2_viewmodel.dart';
 import 'package:adonanku_frontend/widgets/onboarding2_widget.dart';
 
@@ -58,8 +58,7 @@ class _OnboardingPageViewState extends State<OnBoarding2Page> {
           currentPage == onboardingItems.length - 1
               ? ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => LoginPage()));
+                    context.goNamed('login');
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(200, 65),

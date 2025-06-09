@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SearchButton extends StatelessWidget {
-  final TextEditingController searchController = TextEditingController();
+  final String text;
+
+  const SearchButton({
+    required this.text,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,7 @@ class SearchButton extends StatelessWidget {
         ),
         child: TextField(
           decoration: InputDecoration(
-            hintText: 'Cari bahan kamu..',
+            hintText: text,
             filled: true,
             fillColor: const Color.fromARGB(255, 250, 250, 250),
             enabledBorder: OutlineInputBorder(
@@ -26,7 +31,7 @@ class SearchButton extends StatelessWidget {
               ),
               borderSide: BorderSide(
                 color: Color(0xFF929292),
-                width: 0.5, 
+                width: 0.5,
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -35,8 +40,8 @@ class SearchButton extends StatelessWidget {
                 bottomRight: Radius.circular(20),
               ),
               borderSide: BorderSide(
-                color: Color(0xFF11695B), 
-                width: 0.52, 
+                color: Color(0xFF11695B),
+                width: 0.52,
               ),
             ),
             suffixIcon: Icon(Icons.search),

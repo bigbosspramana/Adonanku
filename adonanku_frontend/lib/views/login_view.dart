@@ -1,11 +1,10 @@
-import 'package:adonanku_frontend/views/dashboard_view.dart';
-import 'package:adonanku_frontend/views/regist_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:adonanku_frontend/providers/login_provider.dart';
 import 'dart:math';
 import 'package:adonanku_frontend/widgets/data_card.dart';
-import 'package:adonanku_frontend/models/datacard_helper.dart';
+import 'package:adonanku_frontend/helper/datacard_helper.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
@@ -88,10 +87,7 @@ class LoginPage extends ConsumerWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterPage()),
-                      );
+                      context.pushNamed('register');
                     },
                     child: Text(
                       "Daftar",
@@ -221,12 +217,7 @@ class LoginPage extends ConsumerWidget {
                                 final success = await viewModel.login();
                                 if (success) {
                                   if (context.mounted) {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              const DashboardPage()),
-                                    );
+                                    context.goNamed('dash');
                                   }
                                 } else {
                                   final error = ref.read(loginProvider).value;

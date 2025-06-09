@@ -5,7 +5,7 @@ import '../models/regist_model.dart';
 class RegisterService {
   Future<RegisterModel> register(Map<String, dynamic> data, http.Client client) async {
     final response = await client.post(
-      Uri.parse('http://192.168.1.12:8000/api/register'), // ini nanti diganti saat backend ready
+      Uri.parse('http://172.20.10.3:8000/api/register'), 
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(data),
     );

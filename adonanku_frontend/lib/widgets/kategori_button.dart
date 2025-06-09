@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:adonanku_frontend/models/katbutton_helper.dart';
+import 'package:adonanku_frontend/helper/katbutton_helper.dart';
 
 class KategoriButton extends StatelessWidget {
   final KatButtonModel katbutton;
   final VoidCallback onPressed;
+   final Key? fieldKey;
 
   const KategoriButton(
-      {required this.katbutton, required this.onPressed, super.key});
+      {required this.katbutton, required this.onPressed, this.fieldKey, super.key});
 
   @override
   @override
@@ -14,10 +15,10 @@ class KategoriButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        margin: EdgeInsets.only(right: 12),
+        margin: EdgeInsets.only(right: katbutton.mr),
         padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
         decoration: BoxDecoration(
-          color: const Color(0xFFFFFFFF),
+          color: katbutton.warnabg,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(katbutton.brtLeft),
             bottomRight: Radius.circular(katbutton.brbRight),
@@ -30,10 +31,11 @@ class KategoriButton extends StatelessWidget {
           children: [
             katbutton.iconKat,
             Container(
+              key: fieldKey,
               margin: EdgeInsets.only(top: 15),
               child: Text(
                 katbutton.label,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: katbutton.size, color: katbutton.warnatxt),
               ),
             )
           ],

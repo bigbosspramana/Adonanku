@@ -1,10 +1,11 @@
-import 'package:adonanku_frontend/models/katbutton_helper.dart';
+import 'package:adonanku_frontend/helper/katbutton_helper.dart';
+import 'package:go_router/go_router.dart';
 import 'package:adonanku_frontend/views/inventory_view.dart';
 import 'package:adonanku_frontend/widgets/kategori_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:adonanku_frontend/models/bahancard_helper.dart';
+import 'package:adonanku_frontend/helper/bahancard_helper.dart';
 import 'package:adonanku_frontend/widgets/bahan_card.dart';
 
 class DashboardPage extends ConsumerWidget {
@@ -169,13 +170,14 @@ class DashboardPage extends ConsumerWidget {
                               brbRight: 0,
                               brtLeft: 0,
                               brtRight: 20,
+                              warnabg: Colors.white,
+                              size: 14.0,
+                              warnatxt: Colors.black,
+                              mr: 12
                             ),
+                            key: Key('inventori'),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => InventoryPage()),
-                              );
+                              context.pushNamed('inventory');
                             },
                           ),
                           KategoriButton(
@@ -190,13 +192,14 @@ class DashboardPage extends ConsumerWidget {
                               brbRight: 20,
                               brtLeft: 20,
                               brtRight: 0,
+                              warnabg: Colors.white,
+                              size: 14.0,
+                              warnatxt: Colors.black,
+                              mr: 12
                             ),
+                            key: Key('resep'),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => InventoryPage()),
-                              );
+                              context.pushNamed('resep');
                             },
                           ),
                           KategoriButton(
@@ -211,7 +214,12 @@ class DashboardPage extends ConsumerWidget {
                               brbRight: 0,
                               brtLeft: 0,
                               brtRight: 20,
+                              warnabg: Colors.white,
+                              size: 14.0,
+                              warnatxt: Colors.black,
+                              mr: 0
                             ),
+                            key: Key('konversi'),
                             onPressed: () {
                               Navigator.push(
                                 context,

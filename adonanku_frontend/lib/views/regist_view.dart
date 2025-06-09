@@ -1,7 +1,6 @@
-import 'package:adonanku_frontend/models/custombutton_helper.dart';
-import 'package:adonanku_frontend/models/datacard_helper.dart';
-import 'package:adonanku_frontend/views/dashboard_view.dart';
-import 'package:adonanku_frontend/views/login_view.dart';
+import 'package:adonanku_frontend/helper/custombutton_helper.dart';
+import 'package:adonanku_frontend/helper/datacard_helper.dart';
+import 'package:go_router/go_router.dart';
 import 'package:adonanku_frontend/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:adonanku_frontend/providers/regist_provider.dart';
@@ -61,10 +60,7 @@ class RegisterPage extends ConsumerWidget {
                   right: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                      );
+                      context.pushNamed('login');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFFF9BF51),
@@ -243,11 +239,7 @@ class RegisterPage extends ConsumerWidget {
                                             content:
                                                 Text('Registrasi berhasil')),
                                       );
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => DashboardPage()),
-                                      );
+                                      context.goNamed('dash');
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(

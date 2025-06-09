@@ -1,4 +1,4 @@
-import 'package:adonanku_frontend/models/filter_helper.dart';
+import 'package:adonanku_frontend/helper/filter_helper.dart';
 import 'package:flutter/material.dart';
 
 class FilterWidget extends StatelessWidget {
