@@ -1,5 +1,6 @@
 import 'package:adonanku_frontend/views/dashboard_view.dart';
 import 'package:adonanku_frontend/views/inventory_view.dart';
+import 'package:adonanku_frontend/views/konversi_view.dart';
 import 'package:adonanku_frontend/views/login_view.dart';
 import 'package:adonanku_frontend/views/onboarding1_view.dart';
 import 'package:adonanku_frontend/views/onboarding2_view.dart';
@@ -45,6 +46,11 @@ final GoRouter appRouter = GoRouter(
       path: '/resep',
       name: 'resep',
       builder: (context, state) => const ResepPage(),
+    ),
+    GoRoute(
+      path: '/konversi',
+      name: 'konversi',
+      builder: (context, state) => const KonversiPage(),
     ),
   ],
 

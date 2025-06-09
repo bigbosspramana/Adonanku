@@ -1,8 +1,8 @@
-import 'package:adonanku_frontend/helper/resepcard_helper.dart';
+import 'package:adonanku_frontend/helper/resepnkonversicard_helper.dart';
 import 'package:flutter/material.dart';
 
 class ResepCard extends StatelessWidget {
-  final ResepCardModel cardResep;
+  final ResepnKonversiCardModel cardResep;
 
   const ResepCard({required this.cardResep, super.key});
 

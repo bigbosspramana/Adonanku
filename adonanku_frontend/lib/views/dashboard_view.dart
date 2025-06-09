@@ -1,6 +1,5 @@
 import 'package:adonanku_frontend/helper/katbutton_helper.dart';
 import 'package:go_router/go_router.dart';
-import 'package:adonanku_frontend/views/inventory_view.dart';
 import 'package:adonanku_frontend/widgets/kategori_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -221,11 +220,7 @@ class DashboardPage extends ConsumerWidget {
                             ),
                             key: Key('konversi'),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => InventoryPage()),
-                              );
+                              context.pushNamed('konversi');
                             },
                           ),
                         ],
