@@ -29,4 +29,10 @@ class Konversi extends Model
         return $this->belongsToMany(Resep::class, 'konversi_resep', 'idKonversi', 'idResep')
                     ->withTimestamps();
     }
+
+    public function hasilKonversi()
+    {
+        return $this->hasMany(HasilKonversi::class, 'idKonversi');
+    }
+
 }

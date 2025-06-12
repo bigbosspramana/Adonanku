@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
             ResepSeeder::class,
             ResepBahanSeeder::class,
             LangkahMasakSeeder::class,
-            KonversiSeeder::class,
-            KonversiResepSeeder::class,
-            HasilKonversiSeeder::class,
+            // KonversiSeeder::class,
+            // KonversiResepSeeder::class,
+            // HasilKonversiSeeder::class,
         ]);
 
         $this->command->info('Semua seeder berhasil dijalankan!');
