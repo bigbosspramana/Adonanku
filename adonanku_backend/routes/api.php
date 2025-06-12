@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\LangkahMasakController;
+use App\Http\Controllers\KonversiController;
 
 // Public (tidak butuh token)
 Route::post('/register', [AuthController::class, 'register']);
@@ -49,6 +50,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/langkahmasak/{id}', [LangkahMasakController::class, 'update']);   // Update data
     Route::put('/langkahmasak/resep/{idResep}', [LangkahMasakController::class, 'updateByResep']);
     Route::delete('/langkahmasak/{id}', [LangkahMasakController::class, 'destroy']);// Hapus data
-    
+
+    //CRUD Konversi routes
+    Route::post('/konversi', [KonversiController::class, 'store']);
+    Route::get('/konversis/user/{idUser}', [KonversiController::class, 'konversisByUser']);
+    Route::get('/konversi/{idKonversi}', [KonversiController::class, 'showByIdKonversi']);
+    Route::put('/konversi/{idKonversi}', [KonversiController::class, 'update']);
+    Route::delete('/konversi/{idKonversi}', [KonversiController::class, 'destroy']);
+
 });
 
