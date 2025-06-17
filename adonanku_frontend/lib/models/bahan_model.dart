@@ -1,20 +1,35 @@
-import 'dart:io';
-
 class BahanModel {
   String nama;
-  DateTime? tanggalKadaluwarsa;
   int jumlah;
-  double jumlahSatuan;
   String satuan;
-  File? imageFile;
-  String? fotoPath;
+  DateTime tanggalKadaluwarsa;
+  double jumlahSatuan;
+  String imagePath;
 
   BahanModel({
-    this.nama = '',
-    this.tanggalKadaluwarsa,
-    this.jumlah = 0,
+    required this.nama,
+    required this.jumlah,
+    required this.satuan,
+    required this.tanggalKadaluwarsa,
     this.jumlahSatuan = 0.0,
-    this.satuan = '',
-    this.imageFile,
+    this.imagePath = '',
   });
+
+  BahanModel copyWith({
+    String? nama,
+    int? jumlah,
+    String? satuan,
+    DateTime? tanggalKadaluwarsa,
+    double? jumlahSatuan,
+    String? imagePath,
+  }) {
+    return BahanModel(
+      nama: nama ?? this.nama,
+      jumlah: jumlah ?? this.jumlah,
+      satuan: satuan ?? this.satuan,
+      tanggalKadaluwarsa: tanggalKadaluwarsa ?? this.tanggalKadaluwarsa,
+      jumlahSatuan: jumlahSatuan ?? this.jumlahSatuan,
+      imagePath: imagePath ?? this.imagePath,
+    );
+  }
 }

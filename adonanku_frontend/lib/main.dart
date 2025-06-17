@@ -1,42 +1,27 @@
-import 'package:adonanku_frontend/views/onboarding1_view.dart';
-import 'package:adonanku_frontend/views/tambahbahan_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'views/bahan/bahan_form_page.dart';
 
 void main() {
-  runApp(const ProviderScope(child: TambahBahanApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class TambahBahanApp extends StatelessWidget {
-  const TambahBahanApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Adonanku',
+      title: 'Tes Tambah/Edit Bahan',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 254, 254, 254),
-        fontFamily: 'RadioCanada',
+        fontFamily: 'Radio Canada', // <- gunakan ini, bukan 'RadioCanada'
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF14635D)),
       ),
-      debugShowCheckedModeBanner: false,
-      home: TambahBahanPage(), // Ganti dengan halaman Tambah Bahan
-    );
-  }
-}
-
-class Onboarding1App extends StatelessWidget {
-  const Onboarding1App({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Adonanku',
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 254, 254, 254),
-        fontFamily: 'RadioCanada',
+      home: const BahanFormPage(
+        isEdit: false,
+        key: null,
       ),
-      home: const Onboarding1View(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

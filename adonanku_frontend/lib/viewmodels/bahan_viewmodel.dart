@@ -1,81 +1,134 @@
 import 'package:flutter/material.dart';
+import 'package:adonanku_frontend/models/bahan_model.dart';
 import 'package:image_picker/image_picker.dart';
-import '../models/bahan_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class BahanViewModel extends ChangeNotifier {
-  late BahanModel _bahan;
-  late final ImagePicker _picker;
-  final TextEditingController jumlahController = TextEditingController();
-
-  BahanViewModel({ImagePicker? picker})
-      : _picker = picker ?? ImagePicker(),
-        _bahan = BahanModel() {
-    jumlahController.text = _bahan.jumlah.toString();
-    jumlahController.addListener(() {
-      final text = jumlahController.text;
-      _bahan.jumlah = int.tryParse(text) ?? 0;
-    });
-  }
+  // === MODEL ===
+  BahanModel _bahan = BahanModel(
+    nama: '',
+    jumlah: 0,
+    satuan: '',
+    tanggalKadaluwarsa: DateTime.now(),
+    jumlahSatuan: 0,
+    imagePath: '',
+  );
 
   BahanModel get bahan => _bahan;
 
-  Future<void> pickImage() async {
-    final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery);
+  // === CONTROLLERS ===
+  final TextEditingController namaController = TextEditingController();
+  final TextEditingController tanggalController = TextEditingController();
+  final TextEditingController jumlahSatuanController = TextEditingController();
 
-    if (pickedFile != null) {
-      _bahan.fotoPath = pickedFile.path;
+  // === DROPDOWN SATUAN ===
+  final List<String> satuanOptions = ['gram', 'kg', 'ml', 'liter'];
+  String? selectedSatuan;
+
+  // === GETTER TAMBAHAN ===
+  String get imagePath => _bahan.imagePath;
+  int get jumlah => _bahan.jumlah;
+
+  // === SETTERS / UPDATERS ===
+  void updateNama(String nama) {
+    _bahan = _bahan.copyWith(nama: nama);
+    notifyListeners();
+  }
+
+  // Digunakan oleh input manual dari TextField
+  void updateJumlahFromText(String text) {
+    final value = int.tryParse(text) ?? 0;
+    _bahan = _bahan.copyWith(jumlah: value);
+    notifyListeners();
+  }
+
+  // Digunakan oleh tombol + dan -
+  void updateJumlah(int newJumlah) {
+    if (newJumlah >= 0) {
+      _bahan = _bahan.copyWith(jumlah: newJumlah);
       notifyListeners();
     }
-  }
-
-  void setNama(String nama) {
-    _bahan.nama = nama;
-    notifyListeners();
-  }
-
-  void setTanggal(DateTime tanggal) {
-    _bahan.tanggalKadaluwarsa = tanggal;
-    notifyListeners();
-  }
-
-  void setJumlah(String value) {
-    _bahan.jumlah = int.tryParse(value) ?? 0;
-    jumlahController.text = _bahan.jumlah.toString();
-    notifyListeners();
   }
 
   void incrementJumlah() {
-    _bahan.jumlah++;
-    jumlahController.text = _bahan.jumlah.toString();
-    notifyListeners();
+    updateJumlah(_bahan.jumlah + 1);
   }
 
   void decrementJumlah() {
-    if (_bahan.jumlah > 0) {
-      _bahan.jumlah--;
-      jumlahController.text = _bahan.jumlah.toString();
+    updateJumlah(_bahan.jumlah > 0 ? _bahan.jumlah - 1 : 0);
+  }
+
+  void updateSatuan(String satuan) {
+    _bahan = _bahan.copyWith(satuan: satuan);
+    notifyListeners();
+  }
+
+  void setSelectedSatuan(String? satuan) {
+    selectedSatuan = satuan;
+    if (satuan != null) {
+      updateSatuan(satuan);
+    }
+  }
+
+  void updateTanggal(DateTime tanggal) {
+    _bahan = _bahan.copyWith(tanggalKadaluwarsa: tanggal);
+    tanggalController.text = DateFormat('d MMMM yyyy').format(tanggal);
+    notifyListeners();
+  }
+
+  void updateJumlahSatuan(String value) {
+    final val = double.tryParse(value) ?? 0.0;
+    _bahan = _bahan.copyWith(jumlahSatuan: val);
+    notifyListeners();
+  }
+
+  // === IMAGE PICKER ===
+  Future<void> pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      _bahan = _bahan.copyWith(imagePath: pickedFile.path);
       notifyListeners();
     }
   }
 
-  void setJumlahSatuan(String value) {
-    _bahan.jumlahSatuan = double.tryParse(value) ?? 0;
+  // === SET AWAL (UNTUK EDIT) ===
+  void setInitialValueFromModel(BahanModel model) {
+    _bahan = model;
+    namaController.text = model.nama;
+    jumlahSatuanController.text = model.jumlahSatuan.toString();
+    selectedSatuan = model.satuan;
+    tanggalController.text =
+        DateFormat('d MMMM yyyy').format(model.tanggalKadaluwarsa);
     notifyListeners();
   }
 
-  void setSatuan(String satuan) {
-    _bahan.satuan = satuan;
-    notifyListeners();
-  }
+  // === SIMPAN DATA (SIMPULAN) ===
+  void simpan() {
+    _bahan = _bahan.copyWith(
+      nama: namaController.text.trim(),
+      jumlahSatuan: double.tryParse(jumlahSatuanController.text) ?? 0.0,
+      satuan: selectedSatuan ?? '',
+    );
 
-  void simpanData() {
-    print("Data disimpan: ${_bahan.nama}, ${_bahan.jumlah} ${_bahan.satuan}");
+    if (_bahan.nama.isEmpty || _bahan.satuan.isEmpty || _bahan.jumlah == 0) {
+      debugPrint("❌ Gagal simpan: Isi semua field wajib!");
+      return;
+    }
+
+    debugPrint("✅ Data disimpan: $_bahan");
   }
 
   @override
   void dispose() {
-    jumlahController.dispose();
+    namaController.dispose();
+    tanggalController.dispose();
+    jumlahSatuanController.dispose();
     super.dispose();
   }
 }
+
+final bahanViewModelProvider =
+    ChangeNotifierProvider<BahanViewModel>((ref) => BahanViewModel());
