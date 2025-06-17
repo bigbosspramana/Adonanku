@@ -43,14 +43,14 @@ class _Onboarding1ViewState extends State<Onboarding1View>
                         position: viewModel.slideLeft,
                         child: Container(
                           margin: EdgeInsets.only(right: 62),
-                          child: Image.asset('assets/img/boarding1.png'),
+                          child: Image.asset('assets/img/boarding1.webp'),
                         )),
                   ),
                   FadeTransition(
                     opacity: viewModel.fadeIn,
                     child: SlideTransition(
                       position: viewModel.slideRight,
-                      child: Image.asset('assets/img/boarding2.png'),
+                      child: Image.asset('assets/img/boarding2.webp'),
                     ),
                   ),
                 ],
