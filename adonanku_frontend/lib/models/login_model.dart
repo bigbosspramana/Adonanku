@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:adonanku_frontend/models/user_model.dart';
 
 class LoginRequestModel {
@@ -18,7 +16,7 @@ class LoginResponseModel {
   final String message;
   final String accessToken;
   final String tokenType;
-  final User user;
+  final UserModel user;
 
   LoginResponseModel({
     required this.message,
@@ -32,7 +30,7 @@ class LoginResponseModel {
       message: json['message'] ?? '',
       accessToken: json['access_token'] ?? '',
       tokenType: json['token_type'] ?? '',
-      user: User.fromJson(json['user']),
+      user: UserModel.fromJson(json['user']),
     );
   }
 
