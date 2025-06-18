@@ -1,28 +1,43 @@
-class User {
+class UserModel {
   final int id;
-  final String nama;
+  final String name;
   final String email;
-  final String username;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final String? profilePicture;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
-  User({
+  UserModel({
     required this.id,
-    required this.nama,
+    required this.name,
     required this.email,
-    required this.username,
-    required this.createdAt,
-    required this.updatedAt,
+    this.profilePicture,
+    this.createdAt,
+    this.updatedAt,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
       id: json['id'],
-      nama: json['nama'],
+      name: json['name'],
       email: json['email'],
-      username: json['username'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      profilePicture: json['profile_picture'],
+      createdAt: json['created_at'] != null 
+          ? DateTime.parse(json['created_at']) 
+          : null,
+      updatedAt: json['updated_at'] != null 
+          ? DateTime.parse(json['updated_at']) 
+          : null,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'profile_picture': profilePicture,
+      'created_at': createdAt?.toIso8601String(),
+      'updated_at': updatedAt?.toIso8601String(),
+    };
   }
 }
